@@ -76,18 +76,15 @@ router.route('/:user_id/preferences')
 // GET - GET USER SAVED LISTS
 router.route('/:user_id/lists')
 .get(function(req, res) {
-
-  models.User.findOne({
-    _id: req.user.id
-  }, function(err, user) {
-    if(!user) {
+  console.log("lists please for user", req.params.user_id)
+  models.List.find({
+    user_id: req.params.user_id
+  }, function(err, lists) {
+    console.log(lists)
+    if(!lists) {
       console.log("no user found");
     } else {
-      if(user.saved.length <= 0){
-        res.send({msg: "user did not create a list or saved a recipe yet"});
-      } else {
-        res.send(user.saved);
-      }
+      res.send(lists)
     }
   });
 
@@ -100,13 +97,13 @@ router.route('/:user_id/lists/:listName')
 .get(function(req, res) {
 
   models.List.findOne({
-    user_id: req.user.id,
+    user_id: req.params.user_id,
     listName: req.params.listName
   }, function(err, list){
     if(!list) {
       res.send({msg: "no such list exists for user"});
     } else {
-      res.send({list});
+      res.send(list);
     }
   });
 
