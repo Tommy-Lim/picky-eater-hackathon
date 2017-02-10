@@ -12,7 +12,7 @@ router.route('/')
 .post(function(req, res){
   models.User.findOne({email: req.body.email}, function(err, user){
     if(user){
-      return res.status(400).send({message: "Email already exists"});;
+      return res.status(400).send({message: "Email already exists"});
     } else{
       models.User.create(req.body, function(err, created){
         if(err){
@@ -42,7 +42,7 @@ router.route('/')
 router.route('/preferences')
 .get(function(req, res) {
   models.User.findOne({
-    _id: req.user._id
+    _id: "589e1d54500dcc82082dc53c"
   }, function(err, user) {
     if(!user) {
       console.log("no user found");
@@ -54,28 +54,28 @@ router.route('/preferences')
       }
     }
   });
-});
-
-// POST - ADD TO USER PREFERENCES
-router.route('/preferences')
-.post(function(req, res){
-  models.User.findOne({
+})
+.post(function(req, res){ // ADD STRING TO PREFERENCES DIET/HEALTH/BLOG ARRAY
+  models.User.findOne({ // {diet: [string], health: [string], blog: [string]}
     _id: req.user._id
   }, function(err, user) {
     if(!user) {
       console.log("no user found");
     } else {
-      if(user.saved.length <= 0){
-        res.send({msg: "user did not create a list or saved a recipe yet"});
-      } else {
-        res.send(user.saved);
+      for (var key in req.preferences) {
+        user.preferences[key].concat(req.preferences[key]);
+        user.preferences[key] = user.preferences[key].filter(function(elem, index, self) {
+            return index == self.indexOf(elem);
+        });
       }
     }
+  })
 });
 
 // GET - GET USER SAVED LISTS
 router.route('/lists')
 .get(function(req, res) {
+
   models.User.findOne({
     _id: req.user._id
   }, function(err, user) {
@@ -89,12 +89,15 @@ router.route('/lists')
       }
     }
   });
+
 });
 
 // GET - GET A SPECIFIC LIST BY USER
 // assumes req contains user._id
-router.route('/lists/:listName') // would sort of prefer by id but by name probably looks easier on the eyes
+// would sort of prefer by id but by name probably looks easier on the eyes
+router.route('/lists/:listName')
 .get(function(req, res) {
+
   models.List.findOne({
     user_id: req.user._id,
     listName: req.params.listName
@@ -102,18 +105,16 @@ router.route('/lists/:listName') // would sort of prefer by id but by name proba
     if(!list) {
       res.send({msg: "no such list exists for user"});
     } else {
-      res.send({list});;
+      res.send({list});
     }
   });
-});
 
-// POST - ADD TO SPECIFIC LIST WITH A RECIPE OBJECT
-// assumes req contains user._id, list identifier data (name or _id), and recipe object
-router.route('/lists/:listName') // would sort of prefer by id but names would probably be shorter
-.post(function(req, res) {
+})
+.post(function(req, res) { // assumes req contains user._id, list identifier data (name or _id), and recipe object
+
   models.User.findOne({ // look for the user by _id
     _id: req.user._id
-  });, function(err, user) {
+  }), function(err, user) {
     if(!user) {
       res.send({msg: "what user?"});
     } else { // if the user exists
@@ -130,7 +131,7 @@ router.route('/lists/:listName') // would sort of prefer by id but names would p
               console.log("list created: ", created);
               user.saved.push(created);
               user.save();
-          });;
+          });
         } else { // the list exists, so push the recipe object to its recipeList array
           list.recipeList.push(req.recipe);
           list.save();
@@ -138,6 +139,7 @@ router.route('/lists/:listName') // would sort of prefer by id but names would p
       });
     }
   }
+
 });
 
 
@@ -151,9 +153,9 @@ router.route('/watchlist')
       console.log("no user found");
     } else{
       if(!user.watchlist){
-        res.send({msg: "watchlist empty", watchlist: []});;
+        res.send({msg: "watchlist empty", watchlist: []});
       } else{
-        res.send({watchlist: user.watchlist});;
+        res.send({watchlist: user.watchlist});
       }
     }
   });
@@ -175,11 +177,11 @@ router.route('/watch/:symbol')
       user.save();
       res.send({
         msg: req.params.symbol + " added to " + req.user.email + "'s watchlist"
-      });;
+      });
     }
   });
 
-});
+})
 .delete(function(req, res){
 
   models.User.findOne({
@@ -194,7 +196,7 @@ router.route('/watch/:symbol')
       user.save();
       res.send({
         msg: req.params.symbol + " deleted from " + req.user.email + "'s watchlist"
-      });;
+      });
     }
   });
 
