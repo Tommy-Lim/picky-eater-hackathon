@@ -3,6 +3,16 @@
 <div class="container">
   <h1>Profile of {{profileComp.user.email}}</h1>
 
+  <h2>Your Recipe Lists</h2>
+  <div ng-repeat="listObj in profileComp.lists">
+    <h3>{{listObj.listName}}</h3>
+    <ul>
+      <li ng-repeat="recipe in listObj.recipeList track by $index">
+        {{recipe}}
+      </li>
+    </ul>
+  </div>
+
   <h2>Your Search Prefences</h2>
   <div class="col-xs-4" ng-repeat="filterType in profileComp.prefTypes">
     <h3>{{filterType}}</h3>

@@ -19,7 +19,7 @@ function ProfileCompCtrl($state, $window, DataServices, Auth){
 
   DataServices.getUserLists(profileComp.user.id).then(function(data) {
     profileComp.lists = data.data;
-    console.log(profileComp.lists[0].listName, profileComp.lists[0].recipeList)
+    console.log(profileComp.lists)
   });
 
 }
