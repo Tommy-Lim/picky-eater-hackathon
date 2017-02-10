@@ -3,10 +3,13 @@
 <div class="container">
   <h1>Profile of {{profileComp.user.email}}</h1>
 
+  <h2>Your Search Prefences</h2>
   <div ng-repeat="filterType in profileComp.prefTypes">
     <h3>{{filterType}}</h3>
     <ul>
-      <li ng-repeat="filter in profileComp.preferences[filterType]"></li>
+      <li ng-repeat="filter in profileComp.preferences[filterType] track by $index">
+        {{filter}}
+      </li>
     </ul>
   </div>
 </div>
