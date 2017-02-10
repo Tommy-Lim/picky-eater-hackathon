@@ -5,6 +5,18 @@ body{
   font-family: 'Lato', sans-serif;
 }
 
+.login-button, .signup-button{
+  background-color: #FF6633;
+  border-color: #FF6633;
+  color: white;
+}
+
+.login-button:hover, .signup-button:hover{
+  background-color: #FF9955;
+  border-color: #FF9955;
+  color: white;
+}
+
 .orange{
   color: #FF6633;
 }

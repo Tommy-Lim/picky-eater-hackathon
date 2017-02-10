@@ -40,4 +40,12 @@ div.panel-title.ng-binding{
 
 .panel-links .btn{
   width: 49%;
+  background-color: #009999;
+  border-color: #009999;
+}
+
+.panel-links .btn:hover{
+  background-color: #00CCCC;
+  border-color: #00CCCC;
+
 }

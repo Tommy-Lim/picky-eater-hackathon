@@ -15,3 +15,14 @@
 .details-container .row{
   padding: 10px 0px;
 }
+
+
+#save-recipe{
+  background-color: #009999;
+  border-color: #009999;
+}
+
+#save-recipe:hover{
+  background-color: #00CCCC;
+  border-color: #00CCCC;
+}
