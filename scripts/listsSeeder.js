@@ -51,3 +51,6 @@ function createList(newListName, userEmail) {
             }
         });
 }
+
+createList("beef", user1.email);
+createList("default", user2.email);

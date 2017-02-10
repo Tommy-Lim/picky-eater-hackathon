@@ -47,6 +47,3 @@ function createUser(newUser) {
 
 createUser(user1);
 createUser(user2);
-
-createList("beef", user1.email);
-createList("default", user2.email);
