@@ -25,6 +25,84 @@ router.route('/')
   })
 })
 
+// GET - GET USER DATA
+router.route('/')
+.get(function(req, res) {
+  console.log("hi");
+  models.User.findOne({_id: req.user._id}, function(err, user){
+    if(!user){
+      res.send({msg: "no user found"})
+    } else {
+      res.send({user})
+    }
+  })
+})
+
+// GET - GET USER PREFERENCES
+router.route('/preferences')
+.get(function(req, res) {
+  models.User.findOne({
+    _id: req.user._id
+  }, function(err, user) {
+    if(!user) {
+      console.log("no user found");
+    } else {
+      if(user.preferences.length <= 0){
+        res.send({msg: "user set no search preferences"})
+      } else {
+        res.send(user.preferences);
+      }
+    }
+  })
+})
+
+// GET - GET USER SAVED LISTS
+router.route('/lists')
+.get(function(req, res) {
+  models.User.findOne({
+    _id: req.user._id
+  }, function(err, user) {
+    if(!user) {
+      console.log("no user found");
+    } else {
+      if(user.saved.length <= 0){
+        res.send({msg: "user did not create a list or saved a recipe yet"})
+      } else {
+        res.send(user.saved);
+      }
+    }
+  })
+})
+
+// GET - GET A SPECIFIC LIST OF RECIPES
+router.route('/lists/:listName')
+.get(function(req, res) {
+  models.User.findOne({
+    _id: req.user._id
+  }, function(err, user) {
+    if(!user) {
+      console.log("no user found");
+    } else {
+      if(user.saved.length <= 0){
+        res.send({msg: "user did not create a list or saved a recipe yet"})
+      } else {
+        models.List.findOne({
+          user_id: req.user._id,
+          listName: req.params.listName
+        }, function(err, list){
+          if(!list) {
+            res.send({msg: "no such list exists for user"})
+          } else {
+            res.send({list});
+          }
+        })
+      }
+    }
+  })
+})
+
+
+
 // GET - GET USER WATCHLIST SYMBOLS
 router.route('/watchlist')
 .get(function(req, res){
