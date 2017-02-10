@@ -3,6 +3,10 @@ navbar-comp .navbar{
   color: grey;
 }
 
+.navbar .container{
+  padding-left: 0px;
+}
+
 .nav-search-submit{
   display: none;
 }
@@ -11,6 +15,15 @@ navbar-comp .navbar{
   height: 50px;
   float: left;
   margin-right: 5px;
+}
+
+#nav-collapse-target{
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-form{
+  padding-top: 5px;
 }
 
 .logo-link a{
