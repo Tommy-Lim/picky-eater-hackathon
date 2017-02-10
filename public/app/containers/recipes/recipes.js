@@ -1,13 +1,18 @@
 angular.module('App')
-.component('recipeComp', {
-  templateUrl: 'app/containers/recipe/recipe.html',
-  controller: RecipeCompCtrl,
-  controllerAs: 'recipeComp',
+.component('recipesComp', {
+  templateUrl: 'app/containers/recipes/recipes.html',
+  controller: RecipesCompCtrl,
+  controllerAs: 'recipesComp',
 });
 
-function RecipeCompCtrl($state, $timeout, $window, $location, DataServices, Auth){
-  var recipeComp = this;
+function RecipesCompCtrl($state, $timeout, $window, $location, DataServices, Auth){
+  var recipesComp = this;
+
+  DataServices.getRecipeDetails($state.params.id).then(function(data){
+    recipesComp.result = data.data[0];
+    console.log("recipe: ", recipesComp.result)
+  })
 
 }
 
-RecipeCompCtrl.$inject = ['$state', '$timeout', '$window', '$location', 'DataServices', 'Auth']
+RecipesCompCtrl.$inject = ['$state', '$timeout', '$window', '$location', 'DataServices', 'Auth']

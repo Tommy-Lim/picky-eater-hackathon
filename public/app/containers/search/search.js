@@ -15,6 +15,10 @@ function SearchCompCtrl($state, DataServices){
     console.log("searchComp.results: ", searchComp.results)
   })
 
+  searchComp.save = function(id){
+    console.log(id);
+  }
+
 }
 
 SearchCompCtrl.$inject = ['$state', 'DataServices'];

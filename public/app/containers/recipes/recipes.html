@@ -1,5 +1,65 @@
 <alerts-comp></alerts-comp>
 
 <div class="container">
-  <h1>Recipe</h1>
+  <h1>{{recipesComp.result.label}}</h1>
+  <div class="row">
+    <div class="col-sm-4">
+      <img ng-src="{{recipesComp.result.image}}" />
+    </div>
+    <div class="col-sm-8">
+      <p>({{recipesComp.result.yield}}) Servings</p>
+      <p>Ingredients</p>
+      <ul>
+        <li ng-repeat="ingredient in recipesComp.result.ingredientLines">{{ingredient}}</li>
+      </ul>
+      <p>Health Labels</p>
+      <ul>
+        <li ng-repeat="label in recipesComp.result.healthLabels">{{label}}</li>
+      </ul>
+      <p>Diet Labels</p>
+      <ul>
+        <li ng-repeat="label in recipesComp.result.dietLabels">{{label}}</li>
+      </ul>
+      <p>Recipe from <a href="{{recipesComp.result.url}}">{{recipesComp.result.source}}</a> </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>Total, g</th>
+            <th>Daily, g</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in recipesComp.result.digest">
+            <td>{{item.label}}</td>
+            <td>{{item.total.toFixed(1)}}</td>
+            <td>{{item.daily.toFixed(1)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-6">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Label</th>
+            <th>Total, g</th>
+            <th>Daily, g</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in recipesComp.result.digest">
+            <td>{{item.label}}</td>
+            <td>{{item.total.toFixed(1)}}</td>
+            <td>{{item.daily.toFixed(1)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
