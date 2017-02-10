@@ -12,6 +12,11 @@ function ProfileCompCtrl($state, $window, DataServices, Auth){
 
   profileComp.preferences = DataServices.getUserPreferences(profileComp.user.id);
   console.log(profileComp.preferences)
+  profileComp.lists = DataServices.getUserLists(profileComp.user.id)
+  console.log(profileComp.lists)
+
+  profileComp.defaultList = DataServices.getRecipeList(profileComp.user.id, "default")
+  console.log(profileComp.defaultList)
 
 }
 

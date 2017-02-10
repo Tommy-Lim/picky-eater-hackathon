@@ -38,38 +38,51 @@ function DataServices($http, $window, $location){
 
   // BELOW HERE NEEDS TO BE REDONE
 
-  this.getUserPreferences = function(user_id) {
+  this.getUserPreferences = function(userID) {
     // currentUser eg. {id: "589e0e612b65ee7fba9831b4", email: "user2@email.com", iat: 1486756330}
     var req = {
-      url: '/api/users/' + user_id + '/preferences',
+      url: '/api/users/' + userID + '/preferences',
       method: 'GET'
     }
 
     return $http(req).then(function success(res) {
-      return res;
+      return res.data;
     }, function failure(res) {
-      $window.alerts.push({msg: 'a derp happened', type: 'danger'});
+      $window.alerts.push({msg: 'getUserPreferences could not retrieve data', type: 'danger'});
+      $location.path('/');
+    });
+  }
+
+  this.getUserLists = function(userID) {
+    // currentUser eg. {id: "589e0e612b65ee7fba9831b4", email: "user2@email.com", iat: 1486756330}
+    var req = {
+      url: '/api/users/' + userID + '/lists',
+      method: 'GET'
+    }
+
+    return $http(req).then(function success(res) {
+      return res.data;
+    }, function failure(res) {
+      $window.alerts.push({msg: 'getUserLists could not retrieve data', type: 'danger'});
       $location.path('/');
     });
 
   }
 
-  this.getUserLists = function(user_id) {
-    // currentUser eg. {id: "589e0e612b65ee7fba9831b4", email: "user2@email.com", iat: 1486756330}
+  this.getRecipeList = function(userID, listName) {
     var req = {
-      url: '/api/users/' + user_id + '/lists',
+      url: '/api/users/' + userID + '/lists/' + listName,
       method: 'GET'
     }
 
     return $http(req).then(function success(res) {
-      return res;
+      return res.data;
     }, function failure(res) {
-      $window.alerts.push({msg: 'a derp happened', type: 'danger'});
+      $window.alerts.push({msg: 'getRecipeList could not retrieve data', type: 'danger'});
       $location.path('/');
     });
 
   }
-
 
 
 
