@@ -61,7 +61,7 @@ function AuthServices($window, $http, $location, Auth){
       console.log("success: ", res);
       Auth.saveToken(res.data.token);
       $window.alerts.push({msg: 'User logged in', type: 'success'});
-      $location.path('/portfolio');
+      $location.path('/profile');
     }, function error(res){
       console.log("error: ", res);
       $window.alerts.push({msg: res.data.message, type: 'danger'});
