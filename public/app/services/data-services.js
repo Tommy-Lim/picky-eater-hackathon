@@ -8,7 +8,6 @@ function DataServices($http, $window, $location){
 
 
   this.searchRecipes = function(query) {
-    query = "dinner%20chicken&app_id="+ process.env.APP_ID +"&app_key="+ process.env.APP_KEY+"&health=vegan&health=peanut-free";
     var req = {
       url: '/api/recipes/search/' + query,
       method: "GET",

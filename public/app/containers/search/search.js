@@ -9,6 +9,12 @@ angular.module('App')
 function SearchCompCtrl($state, DataServices){
   var searchComp = this;
 
+  console.log("query: ", $state.params.query)
+
+  DataServices.searchRecipes($state.params.query).then(function(data){
+    console.log("data: ", data)
+  })
+
 }
 
 SearchCompCtrl.$inject = ['$state', 'DataServices'];
