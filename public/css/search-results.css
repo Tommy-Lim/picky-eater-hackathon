@@ -1,0 +1,8 @@
+.panel .panel-recipe{
+  width: 400px;
+  height: 350px;
+}
+
+.panel-recipe img{
+  border-radius: 4px;
+}

@@ -11,7 +11,8 @@ function SearchCompCtrl($state, DataServices){
   console.log("query: ", $state.params.query)
 
   DataServices.searchRecipes($state.params.query).then(function(data){
-    console.log("data: ", data)
+    searchComp.results = data.data;
+    console.log("searchComp.results: ", searchComp.results)
   })
 
 }
