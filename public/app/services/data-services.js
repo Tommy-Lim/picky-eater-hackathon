@@ -3,9 +3,14 @@ angular.module('App')
 
 function DataServices($http, $window, $location){
 
-  this.searchStocks = function(query) {
+
+  // BELOW HERE WORKING FOR CURRENT SITE
+
+
+  this.searchRecipes = function(query) {
+    query = "dinner%20chicken&app_id="+ process.env.APP_ID +"&app_key="+ process.env.APP_KEY+"&health=vegan&health=peanut-free";
     var req = {
-      url: '/api/stocks/lookup/' + query,
+      url: '/api/recipes/search/' + query,
       method: "GET",
     }
 
@@ -17,29 +22,23 @@ function DataServices($http, $window, $location){
     });
   }
 
-  this.getStockDetails = function(stockArray, cb) {
-    var results = [];
-    var numErrors = 0;
-    stockArray.forEach(function(stock) {
-      var req = {
-        url: '/api/stocks/quote/' + stock,
-        method: "GET",
-      }
-      $http(req).then(function success(res) {
-        results.push(res.data);
-        if (stockArray.length === (results.length+ numErrors)) {
-          cb(results);
-        }
-      }, function failure(res) {
-        $window.alerts.push({msg: 'Sorry, Stock API request limit exceeded, please wait 1 min and try again', type: 'danger'});
-        $location.path('/');
-        numErrors++;
-        if (stockArray.length === (results.length+ numErrors)) {
-          cb(results);
-        }
-      });
-    })
+  this.getRecipeDetails = function(id) {
+    var req = {
+      url: '/api/recipes/show/' + id,
+      method: "GET",
+    }
+
+    return $http(req).then(function success(res) {
+      return res;
+    }, function failure(res) {
+      $window.alerts.push({msg: 'Sorry, Stock API request limit exceeded, please wait 1 min and try again', type: 'danger'});
+      $location.path('/');
+    });
   }
+
+
+  // BELOW HERE NEEDS TO BE REDONE
+
 
   this.watchStock = function(symbol){
     var req = {

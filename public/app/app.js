@@ -26,7 +26,7 @@ angular.module('App', ['ui.router', 'ui.bootstrap'])
     })
     .state('recipesState', {
       url: '/recipes/:id',
-      component: 'recipeComp'
+      component: 'recipesComp'
     })
     .state('searchState', {
       url: '/search/:query',
