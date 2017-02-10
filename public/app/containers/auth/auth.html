@@ -1,0 +1,28 @@
+<alerts-comp></alerts-comp>
+
+<div class="container auth-container">
+  <h4>Log in</h4>
+  <form ng-submit="authComp.login()">
+    <div class="form-group">
+      <input name="email" type="email" id="login-email"  class="form-control" placeholder="email" ng-model="authComp.loginUser.email" required autofocus/>
+    </div>
+    <div class="form-group">
+      <input name="password" type="password" class="form-control" placeholder="password" ng-model="authComp.loginUser.password" required />
+    </div>
+    <input type="submit" class="btn btn-success btn-sm"/>
+  </form>
+
+  <hr />
+
+  <h4>Sign up</h4>
+  <form ng-submit="authComp.signup()">
+    <div class="form-group">
+      <input name="email" type="email" class="form-control" placeholder="email" ng-model="authComp.signupUser.email" required />
+    </div>
+    <div class="form-group">
+      <input name="password" type="password" class="form-control" placeholder="password" ng-model="authComp.signupUser.password" required />
+    </div>
+    <input type="submit" class="btn btn-success btn-sm"/>
+  </form>
+
+</div>
