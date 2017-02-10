@@ -1176,33 +1176,24 @@ var beefDumplingsRecipe = {
 
 // ADD RECIPE TO LIST
 
-function addRecipe(newRecipe, list) {
+function addRecipe(newRecipe, listName) {
+  console.log("addRecipe fired for", newRecipe.label, "and", listName);
     models.List.findOne({ // look for the list
-            'userEmail': list.userEmail,
-            'listName': list.listName
-        }),
-        function(err, List) {
+            'listName': listName
+        },
+        function(err, list) {
             console.log("err: ", err);
-            console.log("List: ", List);
-            if (!List) { // if the list does not exist
-                createList(list); // use the previous function to create it
+            console.log("list: ", list);
+            if (!list) { // if the list does not exist
+              console.log("welp")
+                // createList(list); // use the previous function to create it
             } else { // if the list does exist
-                console.log("List found: ", list.ListName);
-                models.Recipe.findOne({ // see if the newRecipe already exists
-                    uri: newRecipe.uri
-                }, function(err, recipe) {
-                    console.log("err: ", err);
-                    console.log("recipe: ", recipe);
-                    if (!recipe) { // if the newRecipe does not exist
-                        list.recipeList.push(recipe); // push the recipe object to the list
-                        list.save(); // save that list
-                    } else {
-                        console.log("recipe found: ", recipe.label);
-                    }
-                });
+                console.log("List found: ", list.listName);
+                list.recipeList.push(newRecipe); // push the recipe object to the list
+                list.save(); // save that list
             }
-        }
-    }
+        })
+}
 
-    addRecipe(belgianBeefRecipe, list1);
-    addRecipe(beefDumplingsRecipe, list2);
+addRecipe(belgianBeefRecipe, listName1);
+addRecipe(beefDumplingsRecipe, listName2);

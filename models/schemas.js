@@ -1,19 +1,19 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-// RECIPE SCHEMA
-// we toss the (valid) object we get in here
-var RecipeSchema = new mongoose.Schema({},{
-  collection: 'Recipes'
-});
-var Recipe = mongoose.model('Recipe', RecipeSchema);
+// // RECIPE SCHEMA
+// // we toss the (valid) object we get in here
+// var RecipeSchema = new mongoose.Schema({},{
+//   collection: 'Recipes'
+// });
+// var Recipe = mongoose.model('Recipe', RecipeSchema);
 
 // LIST SCHEMA
 // contains list's recipes. default listName is "default"
 var ListSchema = new mongoose.Schema({
   user_id: String,
   listName: String,
-  recipeList: [RecipeSchema]
+  recipeList: []
 }, {
   collection: 'Lists'
 });
@@ -76,7 +76,6 @@ var User = mongoose.model('User', UserSchema);
 // EXPORTS
 
 module.exports = {
-  Recipe: Recipe,
   List: List,
   User: User
 };
