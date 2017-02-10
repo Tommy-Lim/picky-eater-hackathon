@@ -14,12 +14,12 @@ function ProfileCompCtrl($state, $window, DataServices, Auth){
   DataServices.getUserPreferences(profileComp.user.id).then(function(data) {
     profileComp.preferences = data.data;
     profileComp.prefTypes = Object.keys(profileComp.preferences)
-    console.log(profileComp.prefTypes)
+    console.log(profileComp.preferences["health"])
   });
 
   DataServices.getUserLists(profileComp.user.id).then(function(data) {
     profileComp.lists = data.data;
-    console.log(profileComp.lists[0].listName, profileComp.lists[0].recipeList)
+    console.log(profileComp.lists)
   });
 
 }
