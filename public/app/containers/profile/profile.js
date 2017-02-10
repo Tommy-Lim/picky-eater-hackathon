@@ -10,14 +10,17 @@ function ProfileCompCtrl($state, $window, DataServices, Auth){
   profileComp.user = Auth.currentUser();
   console.log(profileComp.user);
 
-  profileComp.preferences = DataServices.getUserPreferences(profileComp.user.id);
-  console.log(profileComp.preferences)
-  profileComp.lists = DataServices.getUserLists(profileComp.user.id)
-  console.log(profileComp.lists)
 
-  profileComp.defaultList = DataServices.getRecipeList(profileComp.user.id, "default")
-  console.log(profileComp.defaultList)
+  DataServices.getUserPreferences(profileComp.user.id).then(function(data) {
+    profileComp.preferences = data.data;
+    console.log(profileComp.preferences.blogs, profileComp.preferences.health, profileComp.preferences.diet)
+  });
 
+  DataServices.getUserLists(profileComp.user.id).then(function(data) {
+    profileComp.lists = data.data;
+    console.log(profileComp.lists[0].listName, profileComp.lists[0].recipeList)
+  });
+  
 }
 
 ProfileCompCtrl.$inject = ['$state', '$window', 'DataServices', 'Auth'];
