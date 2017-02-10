@@ -26,23 +26,24 @@ router.route('/')
 });
 
 // GET - GET USER DATA
-// assumes incoming req contains user._id
-router.route('/')
+// assumes incoming req contains user.id
+router.route('/:user_id')
 .get(function(req, res) {
-  models.User.findOne({_id: req.user._id}, function(err, user){
+  models.User.findOne({_id: req.params.user_id}, function(err, user){
     if(!user){
       res.send({msg: "no user found"});
     } else {
-      res.send({user});
+      console.log(user)
+      res.send(user);
     }
   });
 });
 
 // GET - GET USER PREFERENCES
-router.route('/preferences')
+router.route('/:user_id/preferences')
 .get(function(req, res) {
   models.User.findOne({
-    _id: "589e1d54500dcc82082dc53c"
+    _id: req.params.user_id
   }, function(err, user) {
     if(!user) {
       console.log("no user found");
@@ -57,7 +58,7 @@ router.route('/preferences')
 })
 .post(function(req, res){ // ADD STRING TO PREFERENCES DIET/HEALTH/BLOG ARRAY
   models.User.findOne({ // {diet: [string], health: [string], blog: [string]}
-    _id: req.user._id
+    _id: req.params.user_id
   }, function(err, user) {
     if(!user) {
       console.log("no user found");
@@ -73,11 +74,11 @@ router.route('/preferences')
 });
 
 // GET - GET USER SAVED LISTS
-router.route('/lists')
+router.route('/:user_id/lists')
 .get(function(req, res) {
 
   models.User.findOne({
-    _id: req.user._id
+    _id: req.user.id
   }, function(err, user) {
     if(!user) {
       console.log("no user found");
@@ -93,13 +94,13 @@ router.route('/lists')
 });
 
 // GET - GET A SPECIFIC LIST BY USER
-// assumes req contains user._id
+// assumes req contains user.id
 // would sort of prefer by id but by name probably looks easier on the eyes
-router.route('/lists/:listName')
+router.route('/:user_id/lists/:listName')
 .get(function(req, res) {
 
   models.List.findOne({
-    user_id: req.user._id,
+    user_id: req.user.id,
     listName: req.params.listName
   }, function(err, list){
     if(!list) {
@@ -110,21 +111,21 @@ router.route('/lists/:listName')
   });
 
 })
-.post(function(req, res) { // assumes req contains user._id, list identifier data (name or _id), and recipe object
+.post(function(req, res) { // assumes req contains user.id, list identifier data (name or _id), and recipe object
 
   models.User.findOne({ // look for the user by _id
-    _id: req.user._id
+    _id: req.user.id
   }), function(err, user) {
     if(!user) {
       res.send({msg: "what user?"});
     } else { // if the user exists
       models.List.findOne({ // look for an existing list of the same name by the user
-        user_id: user._id,
+        user_id: user.id,
         listName: req.params.listName // make sure we don't have redundant list names
       }, function(err, list){
         if(!list) { // if list does not exist, create one?
           models.List.create({
-              user_id: user._id,
+              user_id: user.id,
               listName: req.params.listName,
               recipeList: [req.recipe] // and add the recipe object to it
           }, function(err, created) {

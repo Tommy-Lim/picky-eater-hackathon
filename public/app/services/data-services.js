@@ -38,6 +38,48 @@ function DataServices($http, $window, $location){
 
   // BELOW HERE NEEDS TO BE REDONE
 
+  this.getUserPreferences = function(user_id) {
+    // currentUser eg. {id: "589e0e612b65ee7fba9831b4", email: "user2@email.com", iat: 1486756330}
+    var req = {
+      url: '/api/users/' + user_id + '/preferences',
+      method: 'GET'
+    }
+
+    return $http(req).then(function success(res) {
+      return res;
+    }, function failure(res) {
+      $window.alerts.push({msg: 'a derp happened', type: 'danger'});
+      $location.path('/');
+    });
+
+  }
+
+  this.getUserLists = function(user_id) {
+    // currentUser eg. {id: "589e0e612b65ee7fba9831b4", email: "user2@email.com", iat: 1486756330}
+    var req = {
+      url: '/api/users/' + user_id + '/lists',
+      method: 'GET'
+    }
+
+    return $http(req).then(function success(res) {
+      return res;
+    }, function failure(res) {
+      $window.alerts.push({msg: 'a derp happened', type: 'danger'});
+      $location.path('/');
+    });
+
+  }
+
+
+
+
+
+
+
+
+
+
+
 
   this.watchStock = function(symbol){
     var req = {
