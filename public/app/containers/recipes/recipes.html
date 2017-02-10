@@ -3,10 +3,10 @@
 <div class="container">
   <h1>{{recipesComp.result.label}}</h1>
   <div class="row">
-    <div class="col-sm-4">
-      <img ng-src="{{recipesComp.result.image}}" />
+    <div class="col-xs-4">
+      <img ng-src="{{recipesComp.result.image}}" class="details-image" />
     </div>
-    <div class="col-sm-8">
+    <div class="col-xs-8 col-md-4">
       <p>({{recipesComp.result.yield}}) Servings</p>
       <p>Ingredients</p>
       <ul>
@@ -22,40 +22,22 @@
       </ul>
       <p>Recipe from <a href="{{recipesComp.result.url}}">{{recipesComp.result.source}}</a> </p>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <table class="table table-condensed">
+    <div class="col-md-4  nutrient-details">
+      <table class="table table-condensed table-bordered">
         <thead>
           <tr>
-            <th>Label</th>
-            <th>Total, g</th>
-            <th>Daily, g</th>
+            <th></th>
+            <th>Amount Per Serving</th>
+            <th>Daily</th>
+            <th>Daily, %</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="item in recipesComp.result.digest">
             <td>{{item.label}}</td>
-            <td>{{item.total.toFixed(1)}}</td>
-            <td>{{item.daily.toFixed(1)}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-sm-6">
-      <table class="table table-condensed">
-        <thead>
-          <tr>
-            <th>Label</th>
-            <th>Total, g</th>
-            <th>Daily, g</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="item in recipesComp.result.digest">
-            <td>{{item.label}}</td>
-            <td>{{item.total.toFixed(1)}}</td>
-            <td>{{item.daily.toFixed(1)}}</td>
+            <td>{{(item.total/recipesComp.result.yield).toFixed(0)}}, {{item.unit}}</td>
+            <td>{{(item.daily/recipesComp.result.yield).toFixed(0)}}, {{item.unit}}</td>
+            <td>{{(item.total/item.daily*100).toFixed(0)}} %</td>
           </tr>
         </tbody>
       </table>

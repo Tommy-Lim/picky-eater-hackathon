@@ -1,0 +1,9 @@
+.details-image{
+  width: 100%;
+}
+
+
+.nutrient-details{
+  max-height: 360px;
+  overflow-y: scroll;
+}
