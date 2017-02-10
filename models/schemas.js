@@ -1,40 +1,45 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-// STOCK SCHEMA
-
-var StockSchema = new mongoose.Schema({
-  Name: String,
-  Symbol: String,
-  LastPrice: Number,
-  Change: Number,
-  ChangePercent: Number,
-  Timestamp: String,
-  MSDate: Number,
-  MarketCap: Number,
-  Volume: Number,
-  ChangeYTD: Number,
-  ChangePercentYTD: Number,
-  High: Number,
-  Low: Number,
-  Open: Number
-},{
-  collection: 'Stocks'
+// RECIPE SCHEMA
+// we toss the (valid) object we get in here
+var RecipeSchema = new mongoose.Schema({},{
+  collection: 'Recipes'
 });
-var Stock = mongoose.model('Stock', StockSchema);
+var Recipe = mongoose.model('Recipe', RecipeSchema);
 
-
-// PURCHASED SCHEMA
-
-var PurchasedSchema = new mongoose.Schema({
+// LIST SCHEMA
+// contains list's recipes. default listName is "default"
+var ListSchema = new mongoose.Schema({
   userEmail: String,
-  stock: StockSchema,
-  quantity: Number,
-},{
-  collection: 'Purchased'
+  listName: String,
+  recipeList: [RecipeSchema]
+}, {
+  collection: 'Lists'
 });
-var Purchased = mongoose.model('Purchased', PurchasedSchema);
+var List = mongoose.model('List', ListSchema);
 
+// SAVED SCHEMA
+// contains user's lists of recipes
+var SavedSchema = new mongoose.Schema({
+  userEmail: String,
+  lists: [ListSchema]
+},{
+  collection: 'Saved'
+});
+var Saved = mongoose.model('Saved', SavedSchema);
+
+// SEARCH PREFERENCES SCHEMA
+// defaults which filters start off checked for each user
+var PreferencesSchema = new mongoose.Schema({
+  userEmail: String,
+  diet: [String],
+  health: [String],
+  blogs: [String]
+}, {
+  collection: 'Preferences'
+});
+var Preferences = mongoose.model('Preferences', PreferencesSchema);
 
 // USER SCHEMA
 
@@ -49,8 +54,8 @@ var UserSchema = new mongoose.Schema({
     type:  String,
     required: true
   },
-  watchlist: [String],
-  purchased: [PurchasedSchema]
+  preferences: PreferencesSchema,
+  saved: [SavedSchema]
 },{
   collection: 'Users'
 });
@@ -89,7 +94,9 @@ var User = mongoose.model('User', UserSchema);
 // EXPORTS
 
 module.exports = {
-  Stock: Stock,
-  Purchased: Purchased,
+  Recipe: Recipe,
+  Saved: Saved,
+  List: List,
+  Preferences: Preferences,
   User: User
 };
