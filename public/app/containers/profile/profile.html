@@ -3,7 +3,10 @@
 <div class="container">
   <h1>Profile of {{profileComp.user.email}}</h1>
 
-  <!-- <ul id="diet">
-    <li ng-repeat></li>
-  </ul> -->
+  <div ng-repeat="filterType in profileComp.prefTypes">
+    <h3>{{filterType}}</h3>
+    <ul>
+      <li ng-repeat="filter in profileComp.preferences[filterType]"></li>
+    </ul>
+  </div>
 </div>
