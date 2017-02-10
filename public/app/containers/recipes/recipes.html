@@ -14,12 +14,16 @@
 
     <div class="col-xs-12 col-sm-8">
       <p>Serves {{recipesComp.result.yield}}</p>
+      <p>Calories per serving {{(recipesComp.result.calories/recipesComp.result.yield).toFixed(0)}}</p>
       <p>Ingredients</p>
       <ul>
         <li ng-repeat="ingredient in recipesComp.result.ingredientLines">{{ingredient}}</li>
       </ul>
 
       <p>Recipe on <a href="{{recipesComp.result.url}}">{{recipesComp.result.source}}</a> </p>
+
+      <a href="#" ng-click="recipesComp.save(recipesComp.result.uri.split('#')[1])" class="btn btn-success">Save</a>
+
     </div>
   </div>
 

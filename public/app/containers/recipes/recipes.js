@@ -13,6 +13,10 @@ function RecipesCompCtrl($state, $timeout, $window, $location, DataServices, Aut
     console.log("recipe: ", recipesComp.result)
   })
 
+  recipesComp.save = function(id){
+    console.log(id);
+  }
+
 }
 
 RecipesCompCtrl.$inject = ['$state', '$timeout', '$window', '$location', 'DataServices', 'Auth']

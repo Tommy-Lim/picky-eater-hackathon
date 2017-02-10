@@ -9,7 +9,8 @@
       </div>
       <div class="panel-body">
         <img ng-src="{{recipe.recipe.image}}" />
-        <p>Calories: {{recipe.recipe.calories.toFixed(0)}}</p>
+        <p>Calories Per Serving:</p>
+        <p> {{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}}</p>
         <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})">Details</a>
         <a href="{{recipe.recipe.url}}">Recipe</a>
         <a href="#" ng-click="searchComp.save(recipe.recipe.uri.split('#')[1])">Save</a>

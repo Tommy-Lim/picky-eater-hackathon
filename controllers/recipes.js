@@ -6,7 +6,7 @@ var request = require('request');
 
 router.route('/search/:query')
 .get(function(req, res) {
-  var url = "https://api.edamam.com/search?q=" + req.params.query+ "&app_id=" + process.env.APP_ID +"&app_key="+ process.env.APP_KEY;
+  var url = "https://api.edamam.com/search?q=" + req.params.query+ "&app_id=" + process.env.APP_ID +"&app_key="+ process.env.APP_KEY + "&to=27";
   request.get(url, function(error, response, data) {
     var data = JSON.parse(data);
     data.params = {}
