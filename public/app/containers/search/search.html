@@ -8,10 +8,14 @@
       </div>
       <div class="panel-body">
         <img ng-src="{{recipe.recipe.image}}" />
-        <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
-        <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})">Details</a>
-        <a href="{{recipe.recipe.url}}">Recipe</a>
-        <a href="#" ng-click="searchComp.save(recipe.recipe.uri.split('#')[1])">Save</a>
+        <div class="panel-body-text">
+          <p>Recipe at <a href="{{recipe.recipe.url}}">{{recipe.recipe.source}}</a></p>
+          <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
+          <div class="panel-links">
+            <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})" class="btn btn-sm btn-info">Details</a>
+            <a href="#" ng-click="searchComp.save(recipe.recipe.uri.split('#')[1])" class="btn btn-sm btn-info">Save</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

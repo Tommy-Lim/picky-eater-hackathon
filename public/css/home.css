@@ -1,13 +1,28 @@
 .home-search-container{
-  margin-top: 200px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   height: 300px;
-  width: 100%;
   display: flex;
   justify-content: center;
   overflow-x: hidden;
   overflow-y: hidden;
+  background-image: url('../img/landing_hero.jpg');
+  background-position: center;
+  background-size: cover;
 }
 
 .home-search-container form{
+  position: relative;
+  top: 50%;
   max-width: 600px;
+
+}
+
+.home-text{
+  color: white;
+  display: block;
+}
+
+.container.search-container{
+  padding-left: 0px;
 }
