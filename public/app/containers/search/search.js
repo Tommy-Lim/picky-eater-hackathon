@@ -5,7 +5,6 @@ angular.module('App')
   controllerAs: 'searchComp'
 });
 
-
 function SearchCompCtrl($state, DataServices){
   var searchComp = this;
 

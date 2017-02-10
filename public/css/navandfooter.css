@@ -1,33 +1,10 @@
 navbar-comp .navbar-inverse{
-  background-color: #444;
-  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+  /*background-color: #444;
+  box-shadow: 3px 3px 5px rgba(0,0,0,0.5);*/
 }
 
 .nav-search-submit{
   display: none;
-}
-
-.navbar-inverse .navbar-brand{
-  color: #5ccf5c;
-}
-
-.navbar-inverse .navbar-nav>.active>a{
-  background-color: #333;
-}
-
-.navbar-inverse .navbar-nav>.active>a:hover{
-  background-color: #222;
-}
-
-.navbar-form input, .navbar-form button{
-  background-color: #555;
-  border: 1px solid #444;
-  color: #E0E0E3;
-}
-
-.navbar-form input:focus{
-  background-color: #EEE;
-  color: black;
 }
 
 .alerts-div{
@@ -50,24 +27,16 @@ footer-comp{
 .footer{
   width: 100%;
   margin-top: 40px;
-  color: white;
-}
-
-.footer a{
-  color: white;
-}
-
-.footer a:hover{
-  text-decoration: none;
+  /*color: white;*/
 }
 
 .footer-body{
-  background-color: #555;
+  /*background-color: #555;*/
   min-height: 100px;
 }
 
 .footer-footer{
-  background-color: #444;
+  /*background-color: #444;*/
   min-height: 50px;
 }
 
@@ -77,62 +46,6 @@ footer-comp{
 
 .contributors{
   padding-bottom: 10px;
-}
-
-.footer .fa-1x{
-  font-size: 1.2em;
-}
-
-.footer .fa-2x{
-  font-size: 1.5em;
-}
-
-.footer .green-no-hover{
-  color: #5ccf5c;
-}
-
-.footer .green{
-  color: #5ccf5c;
-}
-
-.footer .green:hover{
-  color: white;
-}
-
-.footer .grey{
-  color: #lightgrey;
-}
-
-.footer .grey:hover{
-  color: white;
-}
-
-.footer .blue{
-  color: lightskyblue;
-}
-
-.footer .blue:hover{
-  color: white;
-}
-
-.footer .black{
-  color: black;
-}
-
-.footer .black:hover{
-  color: white;
-}
-
-.footer .lightgrey{
-  color: lightgrey;
-}
-
-.footer .lightgrey-no-hover{
-  color: lightgrey;
-}
-
-.footer .lightgrey:hover{
-  color: white;
 }
 
 .mongo-logo{

@@ -8,30 +8,6 @@ body{
   min-height: calc(100vh - 290px);
 }
 
-.chartButton{
-  height: 1em;
-}
-
-.stock-symbol{
-  font-size: 34px;
-  font-weight: 500;
-}
-
-.stock-name{
-  font-size: 14px;
-  color: grey;
-}
-
-.btn-primary{
-  background-color: #2b908f;
-  border-color: #2b8e8e;
-}
-
-.btn-primary:hover{
-  background-color: #09706e;
-  border-color: #09706e;
-}
-
 .unfocus-body{
   position: fixed;
   left: 0;
@@ -41,98 +17,8 @@ body{
   background-color: rgba(150, 150, 150, 0.5);
 }
 
-.title-content{
-
-}
-
-.quote{
-  font-size: 18px;
-  font-style: italic;
-}
-
-.media.panel{
-  height: 79px;
-}
-
-.media-heading{
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.quote-signature{
-  font-size: 16px;
-  text-align: right;
-}
-
-.chart-list-chart{
-  margin: 5px 0;
-}
-
 .auth-container{
   max-width: 300px;
-}
-
-.search-container{
-  max-width: 400px;
-}
-
-.green{
-  color: #5ccf5c;
-}
-
-.red{
-  color: red;
-}
-
-.portfolio-tables{
-  overflow-x: scroll;
-  padding-left: 0;
-}
-
-.portfolio-header{
-  padding-right: 0;
-  text-align: left;
-}
-
-.portfolio-tables th, .portfolio-tables td{
-  white-space: nowrap;
-  padding: 0;
-}
-
-.container .row div{
-  margin: 0 0 5px 0;
-}
-
-.fa-times .red{
-  color: red;
-}
-
-.fa-times.red:hover{
-  cursor: pointer;
-  color: darkred;
-}
-
-.media-object{
-  width: 70px;
-  height: 70px;
-}
-
-.buy-form{
-  padding-top: 5px;
-}
-
-.quantity-input{
-  width: 75px;
-  height: 29px;
-  display: inline-block;
-}
-
-.quote-container {
-  height: 100px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 @media(max-width: 768px){
