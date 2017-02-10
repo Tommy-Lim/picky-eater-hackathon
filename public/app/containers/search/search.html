@@ -1,14 +1,18 @@
 <alerts-comp></alerts-comp>
 
-<div class="container">
-  <h1>Search</h1>
+<div class="container search-container">
 
-  <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{recipe.recipe.label}}</h3>
-    </div>
-    <div class="panel-body">
-      <img ng-src="{{recipe.recipe.image}}" />
+  <div class="search-results">
+    <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{recipe.recipe.label}}</h3>
+      </div>
+      <div class="panel-body">
+        <img ng-src="{{recipe.recipe.image}}" />
+        <p>Calories: {{recipe.recipe.calories.toFixed(0)}}</p>
+        <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})">Details</a>
+        <a href="{{recipe.recipe.url}}">Recipe</a>
+      </div>
     </div>
   </div>
 </div>

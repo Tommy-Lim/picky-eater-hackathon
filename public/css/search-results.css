@@ -1,8 +1,26 @@
-.panel .panel-recipe{
-  width: 400px;
+.panel{
+  width: 230px;
   height: 350px;
+  margin: 5px 5px;
 }
 
 .panel-recipe img{
   border-radius: 4px;
+  width: 200px;
+  height: 200px;
+}
+
+.panel-heading{
+  height: 50px;
+}
+
+.search-results{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.search-container{
+  display: flex;
+  justify-content: center;
 }
