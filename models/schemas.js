@@ -11,7 +11,7 @@ var Recipe = mongoose.model('Recipe', RecipeSchema);
 // LIST SCHEMA
 // contains list's recipes. default listName is "default"
 var ListSchema = new mongoose.Schema({
-  userEmail: String,
+  user_id: String,
   listName: String,
   recipeList: [RecipeSchema]
 }, {
@@ -21,18 +21,18 @@ var List = mongoose.model('List', ListSchema);
 
 // SAVED SCHEMA
 // contains user's lists of recipes
-var SavedSchema = new mongoose.Schema({
-  userEmail: String,
-  lists: [ListSchema]
-},{
-  collection: 'Saved'
-});
-var Saved = mongoose.model('Saved', SavedSchema);
+// var SavedSchema = new mongoose.Schema({
+//   user_id: String,
+//   lists: [ListSchema]
+// },{
+//   collection: 'Saved'
+// });
+// var Saved = mongoose.model('Saved', SavedSchema);
 
 // SEARCH PREFERENCES SCHEMA
 // defaults which filters start off checked for each user
 var PreferencesSchema = new mongoose.Schema({
-  userEmail: String,
+  user_id: String,
   diet: [String],
   health: [String],
   blogs: [String]
@@ -55,7 +55,7 @@ var UserSchema = new mongoose.Schema({
     required: true
   },
   preferences: PreferencesSchema,
-  saved: [SavedSchema]
+  saved: [ListSchema]
 },{
   collection: 'Users'
 });
@@ -95,7 +95,6 @@ var User = mongoose.model('User', UserSchema);
 
 module.exports = {
   Recipe: Recipe,
-  Saved: Saved,
   List: List,
   Preferences: Preferences,
   User: User
