@@ -1,11 +1,21 @@
 navbar-comp .navbar{
   background-color: white;
-  box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
-  color: white;
+  color: grey;
 }
 
 .nav-search-submit{
   display: none;
+}
+
+.navbar-header img{
+  height: 50px;
+  float: left;
+  margin-right: 5px;
+}
+
+.logo-link a{
+  line-height: 50px;
+  margin-top: -10px;
 }
 
 .alerts-div{

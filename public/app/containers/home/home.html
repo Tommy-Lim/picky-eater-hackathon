@@ -1,5 +1,36 @@
 <alerts-comp></alerts-comp>
 
 <div class="container">
-  <h1>Home</h1>
+
+  <div class="home-search-container">
+    <form ng-submit="homeComp.search()">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search recipes" ng-model="homeComp.query" />
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-default" data-toggle="collapse" data-target="#nav-collapse-target">
+            Search
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+
+  <div class="container search-container">
+    <div class="search-results">
+      <div class="panel panel-default panel-recipe" ng-repeat="recipe in homeComp.results.hits | limitTo:6">
+        <div class="panel-heading">
+          <div class="panel-title">{{recipe.recipe.label}}</div>
+        </div>
+        <div class="panel-body">
+          <img ng-src="{{recipe.recipe.image}}" />
+          <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
+          <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})">Details</a>
+          <a href="{{recipe.recipe.url}}">Recipe</a>
+          <a href="#" ng-click="homeComp.save(recipe.recipe.uri.split('#')[1])">Save</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>

@@ -1,7 +1,7 @@
 <alerts-comp></alerts-comp>
 
 <div class="container details-container">
-  <h1>{{recipesComp.result.label}}</h1>
+  <h1 class="written">{{recipesComp.result.label}}</h1>
 
   <div><a ng-repeat="label in recipesComp.result.healthLabels" class="btn btn-xs btn-warning" ui-sref="searchState({query: label})">{{label}}</a></div>
   <div><a ng-repeat="label in recipesComp.result.dietLabels" class="btn btn-xs btn-primary" ui-sref="searchState({query: label})">{{label}}</a></div>
@@ -13,8 +13,8 @@
     </div>
 
     <div class="col-xs-12 col-sm-8">
-      <p>Serves {{recipesComp.result.yield}}</p>
-      <p>Calories per serving {{(recipesComp.result.calories/recipesComp.result.yield).toFixed(0)}}</p>
+      <p>{{(recipesComp.result.calories/recipesComp.result.yield).toFixed(0)}} cal per serving</p>
+      <p>{{recipesComp.result.yield}} servings</p>
       <p>Ingredients</p>
       <ul>
         <li ng-repeat="ingredient in recipesComp.result.ingredientLines">{{ingredient}}</li>

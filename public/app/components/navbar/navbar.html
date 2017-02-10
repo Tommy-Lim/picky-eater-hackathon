@@ -8,31 +8,26 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" ui-sref="homeState()">Tasty Saver</a>
+    <div class="logo-link">
+      <a class="navbar-brand grey" ui-sref="homeState()"><img src="img/tastesaver_logo.png"/> Smart Cooker.</a>
+    </div>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="nav-collapse-target">
     <ul class="nav navbar-nav navbar-right">
       <!-- <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a ui-sref="recipesState({id: ''})">Recipes</a></li> -->
-      <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a ng-show="navbarComp.isLoggedIn()" ui-sref="profileState()">Profile</a></li>
-      <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a ng-show="navbarComp.isLoggedIn()" ui-sref="authState()" ng-click="navbarComp.logout()">Logout</a></li>
-      <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a ng-hide="navbarComp.isLoggedIn()" ui-sref="authState()">Log in / Sign up</a></li>
+      <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a class="grey" ng-show="navbarComp.isLoggedIn()" ui-sref="profileState()">Profile</a></li>
+      <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a class="grey" ng-show="navbarComp.isLoggedIn()" ui-sref="authState()" ng-click="navbarComp.logout()">Logout</a></li>
+      <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a class="grey" ng-hide="navbarComp.isLoggedIn()" ui-sref="authState()">Log in / Sign up</a></li>
     </ul>
 
     <form class="navbar-form" role="search" ng-submit="navbarComp.search()">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search recipes" ng-model="navbarComp.query" />
         <span class="input-group-btn">
-          <button type="reset" class="btn btn-default">
-            <span class="glyphicon glyphicon-remove">
-              <span class="sr-only">Close</span>
-            </span>
-          </button>
           <button type="submit" class="btn btn-default" data-toggle="collapse" data-target="#nav-collapse-target">
-            <span class="glyphicon glyphicon-search">
-              <span class="sr-only">Search</span>
-            </span>
+            Search
           </button>
         </span>
       </div>

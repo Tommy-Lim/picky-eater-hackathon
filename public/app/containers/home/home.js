@@ -5,9 +5,21 @@ angular.module('App')
   controllerAs: 'homeComp'
 });
 
-function HomeCompCtrl($interval, DataServices, AuthServices, Auth){
+function HomeCompCtrl($interval, $state, DataServices, AuthServices, Auth){
   var homeComp = this;
+
+  homeComp.query = "salads";
+
+  homeComp.search = function() {
+    $state.go('searchState', {query: homeComp.query})
+  }
+
+  DataServices.searchRecipes(homeComp.query).then(function(data){
+    homeComp.results = data.data;
+    console.log("searchComp.results: ", homeComp.results)
+  })
+
 
 }
 
-HomeCompCtrl.$inject = ['$interval', 'DataServices', 'AuthServices', 'Auth'];
+HomeCompCtrl.$inject = ['$interval','$state', 'DataServices', 'AuthServices', 'Auth'];

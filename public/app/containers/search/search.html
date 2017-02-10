@@ -1,16 +1,14 @@
 <alerts-comp></alerts-comp>
 
 <div class="container search-container">
-
   <div class="search-results">
-    <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits">
+    <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits | limitTo:9">
       <div class="panel-heading">
         <div class="panel-title">{{recipe.recipe.label}}</div>
       </div>
       <div class="panel-body">
         <img ng-src="{{recipe.recipe.image}}" />
-        <p>Calories Per Serving:</p>
-        <p> {{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}}</p>
+        <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
         <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})">Details</a>
         <a href="{{recipe.recipe.url}}">Recipe</a>
         <a href="#" ng-click="searchComp.save(recipe.recipe.uri.split('#')[1])">Save</a>

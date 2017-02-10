@@ -1,9 +1,25 @@
 body{
   line-height: normal;
-  padding-top: 70px;
+  padding-top: 90px;
   min-height: 100vh;
   font-family: 'Lato', sans-serif;
-  /*font-family: 'Sriracha', cursive;*/
+}
+
+.orange{
+  color: #FF6633;
+}
+
+.teal{
+  color: #009999;
+}
+
+.grey{
+  color: grey;
+}
+
+.written{
+  font-family: 'Sriracha', cursive;
+
 }
 
 .ui-view-div{
