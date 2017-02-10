@@ -5,16 +5,24 @@ body{
   font-family: 'Lato', sans-serif;
 }
 
-.login-button, .signup-button{
+.login-button, .signup-button, .search-button{
   background-color: #FF6633;
   border-color: #FF6633;
   color: white;
 }
 
-.login-button:hover, .signup-button:hover{
+.login-button:hover, .signup-button:hover, .search-button:hover{
   background-color: #FF9955;
   border-color: #FF9955;
   color: white;
+}
+
+.search-button{
+  height: 50px;
+}
+
+.home-search-container input{
+  height: 50px;
 }
 
 .orange{
