@@ -49,22 +49,7 @@ footer-comp{
   padding-bottom: 10px;
 }
 
-.mongo-logo{
-  width: 110px;
-  padding-right: 5px;
-}
-
-.express-logo{
-  width: 110px;
-  padding-right: 5px;
-}
-
-.angular-logo{
-  width: 110px;
-  padding-right: 5px;
-}
-
-.node-logo{
-  width: 110px;
-  padding-right: 5px;
+.mongo-logo, .express-logo, .angular-logo, .node-logo{
+  width: 80px;
+  padding-right: 10px;
 }

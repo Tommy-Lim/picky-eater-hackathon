@@ -1,9 +1,17 @@
 .details-image{
   width: 100%;
+  box-shadow: 5px 5px 3px lightgrey;
 }
 
+.details-container{
+  max-width: 800px;
+}
 
-.nutrient-details{
-  max-height: 360px;
-  overflow-y: scroll;
+.details-container a{
+  margin-right: 2px;
+  margin-bottom: 2px;
+}
+
+.details-container .row{
+  padding: 10px 0px;
 }
