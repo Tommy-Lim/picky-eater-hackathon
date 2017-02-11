@@ -8,7 +8,17 @@
 .panel-recipe img{
   width: 200px;
   height: 200px;
+}
+
+.panel-recipe img:hover{
+  transform:scale(1.1,1.1);
+}
+
+.img-container{
+  width: 200px;
+  height: 200px;
   box-shadow: 5px 5px 3px lightgrey;
+  overflow: hidden;
 }
 
 .panel-heading{
@@ -30,12 +40,12 @@ div.panel-title.ng-binding{
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .panel-links{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .panel-links .btn{

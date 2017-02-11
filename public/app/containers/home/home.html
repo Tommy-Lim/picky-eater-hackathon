@@ -20,7 +20,9 @@
         <div class="panel-title">{{recipe.recipe.label}}</div>
       </div>
       <div class="panel-body">
-        <img ng-src="{{recipe.recipe.image}}" />
+        <div class="img-container">
+          <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})"><img ng-src="{{recipe.recipe.image}}" /></a>
+        </div>
         <div class="panel-body-text">
           <p>Recipe at <a href="{{recipe.recipe.url}}">{{recipe.recipe.source}}</a></p>
           <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>

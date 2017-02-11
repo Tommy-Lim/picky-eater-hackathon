@@ -2,13 +2,15 @@
 
 <div class="container search-container">
   <div class="search-results">
-    <h3 ng-hide="searchComp.results.hits.length > 0">No results found for "{{searchComp.query}}"</h3>
+    <h3 ng-show="searchComp.results.hits.length == 0">No results found for "{{searchComp.query}}"</h3>
     <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits | limitTo:12">
       <div class="panel-heading">
         <div class="panel-title">{{recipe.recipe.label}}</div>
       </div>
       <div class="panel-body">
-        <img ng-src="{{recipe.recipe.image}}" />
+        <div class="img-container">
+          <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})"><img ng-src="{{recipe.recipe.image}}" /></a>
+        </div>
         <div class="panel-body-text">
           <p>Recipe at <a href="{{recipe.recipe.url}}">{{recipe.recipe.source}}</a></p>
           <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
