@@ -8,6 +8,16 @@ angular.module('App')
 function RecipesCompCtrl($state, $timeout, $window, $location, DataServices, Auth){
   var recipesComp = this;
   recipesComp.DataServices = DataServices;
+  recipesComp.user = Auth.currentUser();
+  recipesComp.DataServices = DataServices;
+  recipesComp.savedRecipes = [];
+
+  if(recipesComp.user){
+    recipesComp.DataServices.getRecipes().then(function(data){
+      recipesComp.savedRecipes = data;
+      console.log("SAVED", recipesComp.savedRecipes)
+    })
+  }
 
   DataServices.getRecipeDetails($state.params.id).then(function(data){
     recipesComp.result = data.data[0];

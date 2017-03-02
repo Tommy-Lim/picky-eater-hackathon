@@ -7,9 +7,16 @@ angular.module('App')
 
 function HomeCompCtrl($interval, $state, DataServices, AuthServices, Auth){
   var homeComp = this;
+  homeComp.DataServices = DataServices;
+  homeComp.user = Auth.currentUser();
 
   homeComp.query = "salads";
-  homeComp.DataServices = DataServices;
+
+  if(homeComp.user){
+    homeComp.DataServices.getRecipes().then(function(data){
+      homeComp.savedRecipes = data;
+    })
+  }
 
   homeComp.search = function() {
     $state.go('searchState', {query: homeComp.query})

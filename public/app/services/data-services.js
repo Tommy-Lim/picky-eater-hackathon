@@ -64,8 +64,9 @@ function DataServices($http, $state, $window, $location){
   }
 
   this.deleteRecipe = function(uri){
-    if($state.current.url = "/profile"){
-      document.getElementById(uri.recipe.label).remove();
+    console.log("deleting", uri)
+    if($state.current.url == "/profile"){
+      document.getElementById(uri.label).remove();
     }
 
     uri = encodeURIComponent(JSON.stringify(uri))
@@ -82,10 +83,24 @@ function DataServices($http, $state, $window, $location){
     })
   }
 
-  this.isRecipeSaved = function(recipe, recipes){
-    
+  this.isRecipeSaved = function(recipeURI, recipes){
+    if(recipes.length > 0){
+      recipes = recipes.map(function(recipe_obj){
+        return recipe_obj.uri
+      })
+      console.log(recipes);
+      console.log(recipeURI);
+      if(recipes.indexOf(recipeURI)>=0){
+        console.log(true);
+        return true;
+      } else{
+        console.log(false);
+        return false;
+      }
+    } else{
+      return false;
+    }
   }
-
 
 }
 

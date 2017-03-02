@@ -17,12 +17,12 @@
 }
 
 
-#save-recipe{
+.button-recipe{
   background-color: #009999;
   border-color: #009999;
 }
 
-#save-recipe:hover{
+.button-recipe:hover{
   background-color: #00CCCC;
   border-color: #00CCCC;
 }

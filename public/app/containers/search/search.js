@@ -5,18 +5,22 @@ angular.module('App')
   controllerAs: 'searchComp'
 });
 
-function SearchCompCtrl($state, DataServices){
+function SearchCompCtrl($state, DataServices, Auth){
   var searchComp = this;
   searchComp.DataServices = DataServices;
-
-  console.log("query: ", $state.params.query)
+  searchComp.user = Auth.currentUser();
   searchComp.query = $state.params.query;
+
+  if(searchComp.user){
+    searchComp.DataServices.getRecipes().then(function(data){
+      searchComp.savedRecipes = data;
+    })
+  }
 
   searchComp.DataServices.searchRecipes($state.params.query).then(function(data){
     searchComp.results = data.data;
-    console.log("searchComp.results: ", searchComp.results)
   })
 
 }
 
-SearchCompCtrl.$inject = ['$state', 'DataServices'];
+SearchCompCtrl.$inject = ['$state', 'DataServices', 'Auth'];
