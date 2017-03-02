@@ -64,6 +64,10 @@ function DataServices($http, $state, $window, $location){
   }
 
   this.deleteRecipe = function(uri){
+    if($state.current.url = "/profile"){
+      document.getElementById(uri.recipe.label).remove();
+    }
+
     uri = encodeURIComponent(JSON.stringify(uri))
     var req = {
       url: '/api/users/recipes/' + uri,
@@ -71,12 +75,15 @@ function DataServices($http, $state, $window, $location){
     }
 
     return $http(req).then(function success(res){
-      console.log($state.current)
       return res.data.recipes;
     }, function failure(res){
       $window.alerts.push({msg: 'Sorry, couldn\'t delete recipe.', type: 'danger'});
       $location.path('/');
     })
+  }
+
+  this.isRecipeSaved = function(recipe, recipes){
+    
   }
 
 
