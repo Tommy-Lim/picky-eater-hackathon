@@ -64,12 +64,10 @@ router.route('/recipes/:uri')
     if(!user){
       console.log("user not found");
     } else{
-      console.log("before", user.recipes);
       user.recipes.splice(user.recipes.indexOf(req.params.uri), 1);
-      console.log("after", user.recipes);
       user.save();
       res.send({
-        msg: req.params.uri + " deleted from " + req.user.email + "'s recipes"
+        recipes: user.recipes
       });
     }
   })

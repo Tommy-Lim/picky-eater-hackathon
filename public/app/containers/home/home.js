@@ -9,6 +9,7 @@ function HomeCompCtrl($interval, $state, DataServices, AuthServices, Auth){
   var homeComp = this;
 
   homeComp.query = "salads";
+  homeComp.DataServices = DataServices;
 
   homeComp.search = function() {
     $state.go('searchState', {query: homeComp.query})

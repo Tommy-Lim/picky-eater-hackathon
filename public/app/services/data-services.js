@@ -1,7 +1,7 @@
 angular.module('App')
 .service('DataServices', DataServices);
 
-function DataServices($http, $window, $location){
+function DataServices($http, $state, $window, $location){
 
   // SEARCH FOR RECIPES
   this.searchRecipes = function(query) {
@@ -40,14 +40,17 @@ function DataServices($http, $window, $location){
       method: 'GET'
     }
     return $http(req).then(function success(res){
-      return res.data.recipes;
+      return res.data.recipes.map(function(recipe){
+        return JSON.parse(recipe);
+      });
     }, function failure(res){
-      $window.alerts.push({msg: 'Sorry, Database error. Please wait and try again.', type: 'danger'});
+      $window.alerts.push({msg: 'Sorry, couldn\'t get recipes. Please wait and try again.', type: 'danger'});
       $location.path('/');
     })
   }
 
   this.addRecipe = function(uri){
+    uri = encodeURIComponent(JSON.stringify(uri))
     var req = {
       url: '/api/users/recipes/' + uri,
       method: 'POST'
@@ -55,7 +58,23 @@ function DataServices($http, $window, $location){
     return $http(req).then(function success(res){
       return res.data.recipes;
     }, function failure(res){
-      $window.alerts.push({msg: 'Sorry, couldn\'t add recipe. Please wait and try again.', type: 'danger'});
+      $window.alerts.push({msg: 'Sorry, couldn\'t add recipe.', type: 'danger'});
+      $location.path('/');
+    })
+  }
+
+  this.deleteRecipe = function(uri){
+    uri = encodeURIComponent(JSON.stringify(uri))
+    var req = {
+      url: '/api/users/recipes/' + uri,
+      method: 'DELETE'
+    }
+
+    return $http(req).then(function success(res){
+      console.log($state.current)
+      return res.data.recipes;
+    }, function failure(res){
+      $window.alerts.push({msg: 'Sorry, couldn\'t delete recipe.', type: 'danger'});
       $location.path('/');
     })
   }
@@ -63,4 +82,4 @@ function DataServices($http, $window, $location){
 
 }
 
-DataServices.$inject = ['$http', '$window', '$location'];
+DataServices.$inject = ['$http', '$state', '$window', '$location'];

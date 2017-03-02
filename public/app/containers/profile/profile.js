@@ -5,9 +5,10 @@ angular.module('App')
   controllerAs: 'profileComp'
 });
 
-function ProfileCompCtrl($state, $window, DataServices, Auth){
+function ProfileCompCtrl($state, $scope, $window, DataServices, Auth){
   var profileComp = this;
   profileComp.user = Auth.currentUser();
+  profileComp.DataServices = DataServices;
 
   DataServices.getRecipes().then(function(data){
     console.log("RECIPES:", data);
@@ -16,4 +17,4 @@ function ProfileCompCtrl($state, $window, DataServices, Auth){
 
 }
 
-ProfileCompCtrl.$inject = ['$state', '$window', 'DataServices', 'Auth'];
+ProfileCompCtrl.$inject = ['$state', '$scope', '$window', 'DataServices', 'Auth'];

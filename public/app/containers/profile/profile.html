@@ -1,11 +1,31 @@
 <alerts-comp></alerts-comp>
 
 <div class="container">
-  <h2>Profile of {{profileComp.user.email}}</h2>
+  <h2>Saved Recipes for {{profileComp.user.email}}</h2>
+  <hr />
 
-  <h2>Recipes</h2>
-  <div ng-repeat="recipe in profileComp.recipes">
-    <p>{{recipe}}</p>
+  <div class="container search-container">
+    <div class="search-results">
+      <h3 ng-show="profileComp.recipes.length == 0">No saved recipes</h3>
+      <div class="panel panel-default panel-recipe" ng-repeat="recipe in profileComp.recipes">
+        <div class="panel-heading">
+          <div class="panel-title">{{recipe.recipe.label}}</div>
+        </div>
+        <div class="panel-body">
+          <div class="img-container">
+            <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})"><img ng-src="{{recipe.recipe.image}}" /></a>
+          </div>
+          <div class="panel-body-text">
+            <p>Recipe at <a href="{{recipe.recipe.url}}">{{recipe.recipe.source}}</a></p>
+            <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
+            <div class="panel-links">
+              <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})" class="btn btn-sm btn-info">Details</a>
+              <a href="#" ng-click="profileComp.DataServices.deleteRecipe(recipe.recipe.recipe)" class="btn btn-sm btn-info">Remove</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
