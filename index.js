@@ -25,10 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('morgan')('dev'));
 
 // API layers
-app.use('/api/users', require('./controllers/users')) // janky authorization bypass for now
-// app.use('/api/users', expressJWT({secret: secret}).unless({
-//   path: [{url: '/api/users', methods:['POST']}]
-// }), require('./controllers/users'));
+app.use('/api/users', expressJWT({secret: secret}).unless({
+  path: [{url: '/api/users', methods:['POST']}]
+}), require('./controllers/users'));
 app.use('/api/recipes', require('./controllers/recipes'));
 app.use('/api/saved', expressJWT({secret: secret}), require('./controllers/saved'));
 
@@ -62,16 +61,6 @@ app.post('/api/auth', function(req, res){
     return res.send({user: user, token: token});
   })
 })
-
-// Test routes:
-// app.get('/api/users', function(req, res){
-//   console.log("res: ", res);
-// })
-//
-// app.get('/api/stocks', function(req, res){
-//   console.log("res: ", res);
-// })
-
 
 // GET root - Send index.html
 app.get('/*', function(req, res){

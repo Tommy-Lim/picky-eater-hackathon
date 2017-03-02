@@ -3,10 +3,7 @@ angular.module('App')
 
 function DataServices($http, $window, $location){
 
-
-  // BELOW HERE WORKING FOR CURRENT SITE
-
-
+  // SEARCH FOR RECIPES
   this.searchRecipes = function(query) {
     var req = {
       url: '/api/recipes/search/' + query,
@@ -21,6 +18,7 @@ function DataServices($http, $window, $location){
     });
   }
 
+  // GET RECIPE DETAILS
   this.getRecipeDetails = function(id) {
     var req = {
       url: '/api/recipes/show/' + id,
@@ -35,166 +33,20 @@ function DataServices($http, $window, $location){
     });
   }
 
-
-  // BELOW HERE NEEDS TO BE REDONE
-
-  this.getUserPreferences = function(userID){
+  // GET USERS RECIPES
+  this.getRecipes = function(){
     var req = {
-      url: '/api/users/' + userID + '/preferences',
+      url: '/api/users/recipes',
       method: 'GET'
     }
-
-    return $http(req)
-      .then(function success(res) {
-        return res;
-      }, function failure(res) {
-        $window.alerts.push({msg: 'getUserPreferences could not retrieve data', type: 'danger'});
-        $location.path('/');
-      });
-  }
-
-  this.getUserLists = function(userID) {
-    // currentUser eg. {id: "589e0e612b65ee7fba9831b4", email: "user2@email.com", iat: 1486756330}
-    var req = {
-      url: '/api/users/' + userID + '/lists',
-      method: 'GET'
-    }
-
-    return $http(req).then(function success(res) {
-      return res;
-    }, function failure(res) {
-      $window.alerts.push({msg: 'getUserLists could not retrieve data', type: 'danger'});
+    return $http(req).then(function success(res){
+      return res.data.recipes;
+    }, function failure(res){
+      $window.alerts.push({msg: 'Sorry, Database error. Please wait and try again.', type: 'danger'});
       $location.path('/');
-    });
-
-  }
-
-  this.getRecipeList = function(userID, listName) {
-    var req = {
-      url: '/api/users/' + userID + '/lists/' + listName,
-      method: 'GET'
-    }
-
-    return $http(req).then(function success(res) {
-      return res;
-    }, function failure(res) {
-      $window.alerts.push({msg: 'getRecipeList could not retrieve data', type: 'danger'});
-      $location.path('/');
-    });
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-  this.watchStock = function(symbol){
-    var req = {
-      url: '/api/users/watch/' + symbol,
-      method: 'POST'
-    }
-
-    return $http(req).then(function success(res) {
-      var msg = symbol + ' added to Watchlist. View in Portfolio.';
-      $window.alerts.push({msg: msg, type: 'success'});
-      return res;
-    }, function failure(res) {
-      $window.alerts.push({msg: 'Sorry, HTTP error. Please wait and try again.', type: 'danger'});
-    });
-  }
-
-  this.buyStock = function(symbol, quantity, cb){
-    var dataScope = this;
-    var data = {};
-
-    this.getStockDetails([symbol], function(results){
-      data.stock = results[0];
-      delete data.stock['Status'];
-      data.quantity = quantity;
-
-        var req = {
-          url: '/api/users/buy',
-          method: 'POST',
-          data: {
-            data: data
-          }
-        }
-
-        return $http(req).then(function success(res) {
-          var msg = quantity + ' shares of ' + symbol + ' purchased. View in Portfolio.';
-          $window.alerts.push({msg: msg, type: 'success'});
-          cb(res);
-        }, function failure(res) {
-          $window.alerts.push({msg: 'Sorry, API error. Please wait and try again.', type: 'danger'});
-          $location.path('/');
-        });
-
     })
   }
 
-  this.getWatchlistSymbols = function(){
-    var req = {
-      url: '/api/users/watchlist',
-      method: 'GET'
-    }
-
-    return $http(req).then(function success(res) {
-      return res.data.watchlist;
-    }, function failure(res) {
-      $window.alerts.push({msg: 'Sorry, Database error. Please wait and try again.', type: 'danger'});
-      $location.path('/');
-    });
-  }
-
-  this.getPurchased = function(){
-    var req = {
-      url: '/api/users/purchased',
-      method: 'GET'
-    }
-
-    return $http(req).then(function success(res) {
-      return res.data.purchases;
-    }, function failure(res) {
-      $window.alerts.push({msg: 'Sorry, Database error. Please wait and try again.', type: 'danger'});
-      $location.path('/');
-    });
-  }
-
-  this.removeSymbolFromWatchlist = function(symbol){
-    var req = {
-      url: '/api/users/watch/' + symbol,
-      method: 'DELETE'
-    }
-
-    return $http(req).then(function success(res) {
-      var msg = symbol + ' removed from Watchlist.';
-      $window.alerts.push({msg: msg, type: 'danger'});
-    }, function failure(res) {
-      $window.alerts.push({msg: 'Database error. Try again.', type: 'danger'});
-      // $location.path('/portfolio');
-    });
-  }
-
-  this.removePurchase = function(purchase_Id, symbol, quantity){
-    var req = {
-      url: '/api/users/buy/' + purchase_Id,
-      method: 'DELETE'
-    }
-
-    return $http(req).then(function success(res) {
-      var msg = quantity + ' ' + symbol + ' shares sold.';
-      $window.alerts.push({msg: msg, type: 'success'});
-    }, function failure(res) {
-      $window.alerts.push({msg: 'Database error. Try again.', type: 'danger'});
-      $location.path('/portfolio');
-    });
-  }
 
 }
 

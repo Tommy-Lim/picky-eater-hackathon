@@ -6,7 +6,7 @@ var request = require('request');
 
 router.route('/')
 .get(function(req, res) {
-  res.send("success")
+  res.send("saved hit")
 });
 
 module.exports = router;

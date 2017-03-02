@@ -4,10 +4,7 @@ var models = require('../models/schemas');
 var mongoose = require('mongoose');
 var request = require('request');
 
-// Routes...
-
-
-// POST - USER SIGN UP
+// SIGN UP USER
 router.route('/')
 .post(function(req, res){
   models.User.findOne({email: req.body.email}, function(err, user){
@@ -20,129 +17,13 @@ router.route('/')
         } else{
           return res.send(user);
         }
-      });
-    }
-  });
-});
-
-// GET - GET USER DATA
-// assumes incoming req contains user.id
-router.route('/:user_id')
-.get(function(req, res) {
-  models.User.findOne({_id: req.params.user_id}, function(err, user){
-    if(!user){
-      res.send({msg: "no user found"});
-    } else {
-      console.log(user)
-      res.send(user);
-    }
-  });
-});
-
-// GET - GET USER PREFERENCES
-router.route('/:user_id/preferences')
-.get(function(req, res) {
-  models.User.findOne({
-    _id: req.params.user_id
-  }, function(err, user) {
-    if(!user) {
-      console.log("no user found");
-    } else {
-      if(user.preferences.length <= 0){
-        res.send({msg: "user set no search preferences"});
-      } else {
-        res.send(user.preferences);
-      }
-    }
-  });
-})
-.post(function(req, res){ // ADD STRING TO PREFERENCES DIET/HEALTH/BLOG ARRAY
-  models.User.findOne({ // {diet: [string], health: [string], blog: [string]}
-    _id: req.params.user_id
-  }, function(err, user) {
-    if(!user) {
-      console.log("no user found");
-    } else {
-      for (var key in req.preferences) {
-        user.preferences[key].concat(req.preferences[key]);
-        user.preferences[key] = user.preferences[key].filter(function(elem, index, self) {
-            return index == self.indexOf(elem);
-        });
-      }
+      })
     }
   })
-});
-
-// GET - GET USER SAVED LISTS
-router.route('/:user_id/lists')
-.get(function(req, res) {
-  console.log("lists please for user", req.params.user_id)
-  models.List.find({
-    user_id: req.params.user_id
-  }, function(err, lists) {
-    console.log(lists)
-    if(!lists) {
-      console.log("no user found");
-    } else {
-      res.send(lists)
-    }
-  });
-
-});
-
-// GET - GET A SPECIFIC LIST BY USER
-// assumes req contains user.id
-// would sort of prefer by id but by name probably looks easier on the eyes
-router.route('/:user_id/lists/:listName')
-.get(function(req, res) {
-
-  models.List.findOne({
-    user_id: req.params.user_id,
-    listName: req.params.listName
-  }, function(err, list){
-    if(!list) {
-      res.send({msg: "no such list exists for user"});
-    } else {
-      res.send(list);
-    }
-  });
-
 })
-.post(function(req, res) { // assumes req contains user.id, list identifier data (name or _id), and recipe object
 
-  models.User.findOne({ // look for the user by _id
-    _id: req.user.id
-  }), function(err, user) {
-    if(!user) {
-      res.send({msg: "what user?"});
-    } else { // if the user exists
-      models.List.findOne({ // look for an existing list of the same name by the user
-        user_id: user.id,
-        listName: req.params.listName // make sure we don't have redundant list names
-      }, function(err, list){
-        if(!list) { // if list does not exist, create one?
-          models.List.create({
-              user_id: user.id,
-              listName: req.params.listName,
-              recipeList: [req.recipe] // and add the recipe object to it
-          }, function(err, created) {
-              console.log("list created: ", created);
-              user.saved.push(created);
-              user.save();
-          });
-        } else { // the list exists, so push the recipe object to its recipeList array
-          list.recipeList.push(req.recipe);
-          list.save();
-        }
-      });
-    }
-  }
-
-});
-
-
-// GET - GET USER WATCHLIST SYMBOLS
-router.route('/watchlist')
+// GET USER RECIPES
+router.route('/recipes')
 .get(function(req, res){
   models.User.findOne({
     email: req.user.email
@@ -150,55 +31,48 @@ router.route('/watchlist')
     if(!user){
       console.log("no user found");
     } else{
-      if(!user.watchlist){
-        res.send({msg: "watchlist empty", watchlist: []});
+      if(!user.recipes){
+        res.send({msg: "recipes empty", recipes: []});
       } else{
-        res.send({watchlist: user.watchlist});
+        res.send({recipes: user.recipes});
       }
     }
-  });
+  })
+})
 
-});
-
-// POST - ADD SYMBOL TO USER WATCHLIST
-// DELETE - REMOVE SYMBOL FROM USER WATCHLIST
-router.route('/watch/:symbol')
+// ADD AND DELETE RECIPES BASED ON URI
+router.route('/recipes/:uri')
 .post(function(req, res){
-
   models.User.findOne({
     email: req.user.email
   }, function(err, user){
     if(!user){
       console.log("user not found");
     } else{
-      user.watchlist.push(req.params.symbol);
+      user.recipes.push(req.params.uri);
       user.save();
       res.send({
-        msg: req.params.symbol + " added to " + req.user.email + "'s watchlist"
+        msg: req.params.uri + " added to " + req.user.email + "'s recipes"
       });
     }
-  });
-
+  })
 })
 .delete(function(req, res){
-
   models.User.findOne({
     email: req.user.email
   }, function(err, user){
     if(!user){
       console.log("user not found");
     } else{
-      console.log("before", user.watchlist);
-      user.watchlist.splice(user.watchlist.indexOf(req.params.symbol), 1);
-      console.log("after", user.watchlist);
+      console.log("before", user.recipes);
+      user.recipes.splice(user.recipes.indexOf(req.params.uri), 1);
+      console.log("after", user.recipes);
       user.save();
       res.send({
-        msg: req.params.symbol + " deleted from " + req.user.email + "'s watchlist"
+        msg: req.params.uri + " deleted from " + req.user.email + "'s recipes"
       });
     }
-  });
-
-});
-
+  })
+})
 
 module.exports = router;
