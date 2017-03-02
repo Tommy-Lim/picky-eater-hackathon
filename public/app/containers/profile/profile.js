@@ -8,10 +8,10 @@ angular.module('App')
 function ProfileCompCtrl($state, $window, DataServices, Auth){
   var profileComp = this;
   profileComp.user = Auth.currentUser();
-  console.log(profileComp.user);
 
   DataServices.getRecipes().then(function(data){
     console.log("RECIPES:", data);
+    profileComp.recipes = data;
   })
 
 }

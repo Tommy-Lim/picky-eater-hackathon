@@ -52,7 +52,7 @@ router.route('/recipes/:uri')
       user.recipes.push(req.params.uri);
       user.save();
       res.send({
-        msg: req.params.uri + " added to " + req.user.email + "'s recipes"
+        recipes: user.recipes
       });
     }
   })

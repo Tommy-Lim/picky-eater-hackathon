@@ -47,6 +47,19 @@ function DataServices($http, $window, $location){
     })
   }
 
+  this.addRecipe = function(uri){
+    var req = {
+      url: '/api/users/recipes/' + uri,
+      method: 'POST'
+    }
+    return $http(req).then(function success(res){
+      return res.data.recipes;
+    }, function failure(res){
+      $window.alerts.push({msg: 'Sorry, couldn\'t add recipe. Please wait and try again.', type: 'danger'});
+      $location.path('/');
+    })
+  }
+
 
 }
 

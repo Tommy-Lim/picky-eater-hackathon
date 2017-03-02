@@ -16,7 +16,7 @@
           <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
           <div class="panel-links">
             <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})" class="btn btn-sm btn-info">Details</a>
-            <a href="#" ng-click="searchComp.save(recipe.recipe.uri.split('#')[1])" class="btn btn-sm btn-info">Save</a>
+            <a href="#" ng-click="searchComp.DataServices.addRecipe(recipe.recipe.uri.split('#')[1])" class="btn btn-sm btn-info">Save</a>
           </div>
         </div>
       </div>
