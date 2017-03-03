@@ -23,7 +23,7 @@
       <p>Recipe on <a href="{{recipesComp.result.url}}">{{recipesComp.result.source}}</a> </p>
 
       <a href="#" ng-if="recipesComp.user && !recipesComp.DataServices.isRecipeSaved(recipesComp.result.uri, recipesComp.savedRecipes)" ng-click="recipesComp.addRecipe(recipesComp.result);" class="btn btn-info button-recipe">Save</a>
-      <a href="#" ng-if="recipesComp.user && recipesComp.DataServices.isRecipeSaved(recipesComp.result.uri, recipesComp.savedRecipes)" ng-click="recipesComp.deleteRecipe(recipesComp.result);" class="btn btn-info button-recipe">Remove</a>
+      <a href="#" ng-if="recipesComp.user && recipesComp.DataServices.isRecipeSaved(recipesComp.result.uri, recipesComp.savedRecipes)" ng-click="recipesComp.deleteRecipe(recipesComp.result);" class="btn btn-info button-recipe btn-delete">Remove</a>
 
     </div>
   </div>

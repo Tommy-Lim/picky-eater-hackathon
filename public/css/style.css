@@ -60,6 +60,15 @@ body{
   background-color: rgba(150, 150, 150, 0.1);
 }
 
+.panel-links .btn.btn-delete, .button-recipe.btn-delete{
+  background-color: grey;
+  border-color: grey;
+}
+.panel-links .btn.btn-delete:hover, .button-recipe.btn-delete:hover{
+  background-color: darkgrey;
+  border-color: darkgrey;
+}
+
 .auth-container{
   max-width: 300px;
 }
