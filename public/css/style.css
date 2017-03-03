@@ -74,7 +74,8 @@ body{
 }
 
 .demo-text{
-  padding: 5px 0px;
+  padding: 5px;
+  border: 1px solid red;
 }
 
 @media(max-width: 768px){
