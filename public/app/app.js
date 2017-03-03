@@ -47,4 +47,7 @@ angular.module('App', ['ui.router', 'ui.bootstrap'])
       return trans.router.stateService.target('authState');
     }
   })
+}])
+.run(['$rootScope', '$state', '$stateParams', function($rootScope, $state, $stateParams){
+    $rootScope.$state = $state;
 }]);

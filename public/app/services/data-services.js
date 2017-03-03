@@ -54,6 +54,7 @@ function DataServices($http, $state, $window, $location){
       data: recipe
     }
     return $http(req).then(function success(res){
+      $window.alerts.push({msg: 'Recipe added.', type: 'success'});
       return res.data.recipes;
     }, function failure(res){
       $window.alerts.push({msg: 'Sorry, couldn\'t add recipe.', type: 'danger'});
@@ -71,6 +72,7 @@ function DataServices($http, $state, $window, $location){
       method: 'DELETE',
     }
     return $http(req).then(function success(res){
+      $window.alerts.push({msg: 'Recipe removed.', type: 'success'});
       return res.data.recipes;
     }, function failure(res){
       $window.alerts.push({msg: 'Sorry, couldn\'t delete recipe.', type: 'danger'});

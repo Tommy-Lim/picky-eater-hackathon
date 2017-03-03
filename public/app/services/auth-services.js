@@ -45,12 +45,10 @@ function AuthServices($window, $http, $location, Auth){
   this.userSignup = function(user){
     var AuthServices = this;
     $http.post('/api/users', user).then(function success(res){
-      console.log("post success", res);
       $window.alerts.push({msg: 'User signed up - Welcome!', type: 'success'});
       AuthServices.userLogin(user);
       // $location.path('/');
     }, function failure(res){
-      console.log("post failure", res);
       $window.alerts.push({msg: res.data.message, type: 'danger'});
       $location.path('/auth');
     })
@@ -58,12 +56,10 @@ function AuthServices($window, $http, $location, Auth){
 
   this.userLogin = function(user){
     $http.post('/api/auth', user).then(function success(res){
-      console.log("success: ", res);
       Auth.saveToken(res.data.token);
       $window.alerts.push({msg: 'User logged in', type: 'success'});
       $location.path('/profile');
     }, function error(res){
-      console.log("error: ", res);
       $window.alerts.push({msg: res.data.message, type: 'danger'});
       $location.path('/auth');
     })

@@ -21,7 +21,7 @@
       <li ui-sref-active="active" data-toggle="collapse" data-target="#nav-collapse-target" ng-click="navbarComp.hideOverlay()"><a class="grey" ng-hide="navbarComp.isLoggedIn()" ui-sref="authState()">Log in / Sign up</a></li>
     </ul>
 
-    <form class="navbar-form" role="search" ng-submit="navbarComp.search()">
+    <form class="navbar-form" role="search" ng-submit="navbarComp.search()" ng-if="!('homeState' | isState)">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search recipes" ng-model="navbarComp.query" />
         <span class="input-group-btn">
