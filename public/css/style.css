@@ -73,6 +73,10 @@ body{
   background-color: rgba(150, 150, 150, 0.6);
 }
 
+.demo-text{
+  padding: 5px 0px;
+}
+
 @media(max-width: 768px){
   .ui-view-div{
     min-height: calc(100vh - 380px);
