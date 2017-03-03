@@ -24,7 +24,6 @@ function HomeCompCtrl($interval, $state, DataServices, AuthServices, Auth){
 
   DataServices.searchRecipes(homeComp.query).then(function(data){
     homeComp.results = data.data;
-    console.log("searchComp.results: ", homeComp.results)
   })
 
   homeComp.addRecipe = function(recipe){

@@ -41,9 +41,6 @@ function DataServices($http, $state, $window, $location){
     }
     return $http(req).then(function success(res){
       return res.data.recipes;
-      // return res.data.recipes.map(function(recipe){
-      //   return JSON.parse(recipe);
-      // });
     }, function failure(res){
       $window.alerts.push({msg: 'Sorry, couldn\'t get recipes. Please wait and try again.', type: 'danger'});
       $location.path('/');
@@ -56,7 +53,6 @@ function DataServices($http, $state, $window, $location){
       method: 'POST',
       data: recipe
     }
-    console.log(req);
     return $http(req).then(function success(res){
       return res.data.recipes;
     }, function failure(res){
@@ -74,7 +70,6 @@ function DataServices($http, $state, $window, $location){
       url: '/api/users/recipes/' + uri,
       method: 'DELETE',
     }
-    console.log(req);
     return $http(req).then(function success(res){
       return res.data.recipes;
     }, function failure(res){

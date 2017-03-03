@@ -11,7 +11,6 @@ function ProfileCompCtrl($state, $scope, $window, DataServices, Auth){
   profileComp.DataServices = DataServices;
 
   DataServices.getRecipes().then(function(data){
-    console.log("RECIPES:", data);
     profileComp.recipes = data;
   })
 
