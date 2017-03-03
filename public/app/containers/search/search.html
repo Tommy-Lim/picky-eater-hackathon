@@ -16,7 +16,7 @@
           <p>{{(recipe.recipe.calories/recipe.recipe.yield).toFixed(0)}} calories per serving</p>
           <div class="panel-links">
             <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})" class="btn btn-sm btn-info">Details</a>
-            <a href="#" ng-if="!homeComp.user" ui-sref="authState()" class="btn btn-sm btn-info">Log in to Save</a>
+            <a href="#" ng-if="!searchComp.user" ui-sref="authState()" class="btn btn-sm btn-info">Log in to Save</a>
             <a href="#" ng-if="searchComp.user && !searchComp.DataServices.isRecipeSaved(recipe.recipe.uri, searchComp.savedRecipes)" ng-click="searchComp.addRecipe(recipe.recipe);" class="btn btn-sm btn-info">Save</a>
             <a href="#" ng-if="searchComp.user && searchComp.DataServices.isRecipeSaved(recipe.recipe.uri, searchComp.savedRecipes)" ng-click="searchComp.deleteRecipe(recipe.recipe);" class="btn btn-sm btn-info btn-delete">Remove</a>
           </div>
