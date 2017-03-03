@@ -64,7 +64,6 @@ function DataServices($http, $state, $window, $location){
   }
 
   this.deleteRecipe = function(uri){
-    console.log("deleting", uri)
     if($state.current.url == "/profile"){
       document.getElementById(uri.label).remove();
     }
@@ -88,13 +87,9 @@ function DataServices($http, $state, $window, $location){
       recipes = recipes.map(function(recipe_obj){
         return recipe_obj.uri
       })
-      console.log(recipes);
-      console.log(recipeURI);
       if(recipes.indexOf(recipeURI)>=0){
-        console.log(true);
         return true;
       } else{
-        console.log(false);
         return false;
       }
     } else{

@@ -5,7 +5,7 @@ angular.module('App')
   controllerAs: 'recipesComp',
 });
 
-function RecipesCompCtrl($state, $timeout, $window, $location, DataServices, Auth){
+function RecipesCompCtrl($state, $scope, $timeout, $window, $location, DataServices, Auth){
   var recipesComp = this;
   recipesComp.DataServices = DataServices;
   recipesComp.user = Auth.currentUser();
@@ -15,16 +15,29 @@ function RecipesCompCtrl($state, $timeout, $window, $location, DataServices, Aut
   if(recipesComp.user){
     recipesComp.DataServices.getRecipes().then(function(data){
       recipesComp.savedRecipes = data;
-      console.log("SAVED", recipesComp.savedRecipes)
     })
   }
 
   DataServices.getRecipeDetails($state.params.id).then(function(data){
     recipesComp.result = data.data[0];
-    console.log("recipe: ", recipesComp.result)
   })
 
+  recipesComp.addRecipe = function(recipe){
+    DataServices.addRecipe(recipe).then(function(data){
+      recipesComp.savedRecipes = data.map(function(item){
+        return JSON.parse(item);
+      })
+    })
+  }
+
+  recipesComp.deleteRecipe = function(recipe){
+    DataServices.deleteRecipe(recipe).then(function(data){
+      recipesComp.savedRecipes = data.map(function(item){
+        return JSON.parse(item);
+      })
+    })
+  }
 
 }
 
-RecipesCompCtrl.$inject = ['$state', '$timeout', '$window', '$location', 'DataServices', 'Auth']
+RecipesCompCtrl.$inject = ['$state', '$scope', '$timeout', '$window', '$location', 'DataServices', 'Auth']
