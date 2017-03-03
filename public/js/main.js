@@ -1,1 +1,1 @@
-console.log("Welcome to Picky Eater!")
+console.log("Welcome to Taste Saver!")
