@@ -9,6 +9,14 @@ function NavbarCompCtrl($state, $window, Auth){
   var navbarComp = this;
   navbarComp.query = "";
 
+
+console.log($state.current.url)
+  if($state.current.url == "/"){
+    navbarComp.isHome = true;
+  } else{
+    navbarComp.isHome = false;
+  }
+
   navbarComp.logout = function(){
     Auth.userLogout();
   }

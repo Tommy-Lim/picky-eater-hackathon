@@ -40,21 +40,23 @@ function DataServices($http, $state, $window, $location){
       method: 'GET'
     }
     return $http(req).then(function success(res){
-      return res.data.recipes.map(function(recipe){
-        return JSON.parse(recipe);
-      });
+      return res.data.recipes;
+      // return res.data.recipes.map(function(recipe){
+      //   return JSON.parse(recipe);
+      // });
     }, function failure(res){
       $window.alerts.push({msg: 'Sorry, couldn\'t get recipes. Please wait and try again.', type: 'danger'});
       $location.path('/');
     })
   }
 
-  this.addRecipe = function(uri){
-    uri = encodeURIComponent(JSON.stringify(uri))
+  this.addRecipe = function(recipe){
     var req = {
-      url: '/api/users/recipes/' + uri,
-      method: 'POST'
+      url: '/api/users/recipes',
+      method: 'POST',
+      data: recipe
     }
+    console.log(req);
     return $http(req).then(function success(res){
       return res.data.recipes;
     }, function failure(res){
@@ -63,17 +65,16 @@ function DataServices($http, $state, $window, $location){
     })
   }
 
-  this.deleteRecipe = function(uri){
+  this.deleteRecipe = function(uri, label){
     if($state.current.url == "/profile"){
-      document.getElementById(uri.label).remove();
+      document.getElementById(label).remove();
     }
-
-    uri = encodeURIComponent(JSON.stringify(uri))
+    uri = encodeURIComponent(uri);
     var req = {
       url: '/api/users/recipes/' + uri,
-      method: 'DELETE'
+      method: 'DELETE',
     }
-
+    console.log(req);
     return $http(req).then(function success(res){
       return res.data.recipes;
     }, function failure(res){
@@ -83,15 +84,14 @@ function DataServices($http, $state, $window, $location){
   }
 
   this.isRecipeSaved = function(recipeURI, recipes){
-    if(recipes.length > 0){
-      recipes = recipes.map(function(recipe_obj){
-        return recipe_obj.uri
+    if(recipes && recipes.length > 0){
+      isSaved = false;
+      recipes.forEach(function(recipe){
+        if(recipe.uri == recipeURI){
+          isSaved = true;
+        }
       })
-      if(recipes.indexOf(recipeURI)>=0){
-        return true;
-      } else{
-        return false;
-      }
+      return isSaved;
     } else{
       return false;
     }

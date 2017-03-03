@@ -10,6 +10,7 @@ function SearchCompCtrl($state, $scope, DataServices, Auth){
   searchComp.DataServices = DataServices;
   searchComp.user = Auth.currentUser();
   searchComp.query = $state.params.query;
+  searchComp.selected = "12";
 
   searchComp.DataServices.searchRecipes($state.params.query).then(function(data){
     searchComp.results = data.data;
@@ -23,17 +24,13 @@ function SearchCompCtrl($state, $scope, DataServices, Auth){
 
   searchComp.addRecipe = function(recipe){
     DataServices.addRecipe(recipe).then(function(data){
-      searchComp.savedRecipes = data.map(function(item){
-        return JSON.parse(item);
-      })
+      searchComp.savedRecipes = data;
     })
   }
 
   searchComp.deleteRecipe = function(recipe){
     DataServices.deleteRecipe(recipe).then(function(data){
-      searchComp.savedRecipes = data.map(function(item){
-        return JSON.parse(item);
-      })
+      searchComp.savedRecipes = data;
     })
   }
 

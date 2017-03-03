@@ -59,3 +59,8 @@ div.panel-title.ng-binding{
   border-color: #00CCCC;
 
 }
+
+.show-number-container{
+  padding-bottom: 20px;
+  text-align: center;
+}

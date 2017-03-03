@@ -41,15 +41,16 @@ router.route('/recipes')
 })
 
 // ADD AND DELETE RECIPES BASED ON URI
-router.route('/recipes/:uri')
+router.route('/recipes')
 .post(function(req, res){
+  console.log("REQ", req.body);
   models.User.findOne({
     email: req.user.email
   }, function(err, user){
     if(!user){
       console.log("user not found");
     } else{
-      user.recipes.push(req.params.uri);
+      user.recipes.push(req.body);
       user.save();
       res.send({
         recipes: user.recipes
@@ -57,6 +58,7 @@ router.route('/recipes/:uri')
     }
   })
 })
+router.route('/recipes/:uri')
 .delete(function(req, res){
   models.User.findOne({
     email: req.user.email
@@ -64,7 +66,11 @@ router.route('/recipes/:uri')
     if(!user){
       console.log("user not found");
     } else{
-      user.recipes.splice(user.recipes.indexOf(req.params.uri), 1);
+      user.recipes.forEach(function(recipe, index){
+        if(recipe.uri == req.params.uri){
+          user.recipes.splice(index, 1);
+        }
+      })
       user.save();
       res.send({
         recipes: user.recipes

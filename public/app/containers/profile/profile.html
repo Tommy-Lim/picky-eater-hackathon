@@ -20,7 +20,7 @@
             <p>{{(recipe.calories/recipe.yield).toFixed(0)}} calories per serving</p>
             <div class="panel-links">
               <a ui-sref="recipesState({id: recipe.uri.split('#')[1]})" class="btn btn-sm btn-info">Details</a>
-              <a href="#" ng-click="profileComp.DataServices.deleteRecipe(recipe)" class="btn btn-sm btn-info btn-delete">Remove</a>
+              <a href="#" ng-click="profileComp.DataServices.deleteRecipe(recipe.uri, recipe.label)" class="btn btn-sm btn-info btn-delete">Remove</a>
             </div>
           </div>
         </div>

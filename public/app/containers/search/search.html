@@ -1,9 +1,21 @@
 <alerts-comp></alerts-comp>
 
+<div ng-if="searchComp.results.hits.length > 0" class="container show-number-container">
+  <h3>({{searchComp.results.hits.length}}) recipes found for "{{searchComp.query}}":</h3>
+  <form>
+    <label for="numResults" >Show </label>
+    <select name="numResults" ng-model="searchComp.selected">
+      <option value="12" selected>12</option>
+      <option value="24">24</option>
+      <option value="48">48</option>
+    </select>
+  </form>
+</div>
+
 <div class="container search-container">
   <div class="search-results">
     <h3 ng-show="searchComp.results.hits.length == 0">No results found for "{{searchComp.query}}"</h3>
-    <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits | limitTo:12">
+    <div class="panel panel-default panel-recipe" ng-repeat="recipe in searchComp.results.hits | limitTo:searchComp.selected">
       <div class="panel-heading">
         <div class="panel-title">{{recipe.recipe.label}}</div>
       </div>
@@ -18,7 +30,7 @@
             <a ui-sref="recipesState({id: recipe.recipe.uri.split('#')[1]})" class="btn btn-sm btn-info">Details</a>
             <a href="#" ng-if="!searchComp.user" ui-sref="authState()" class="btn btn-sm btn-info">Log in to Save</a>
             <a href="#" ng-if="searchComp.user && !searchComp.DataServices.isRecipeSaved(recipe.recipe.uri, searchComp.savedRecipes)" ng-click="searchComp.addRecipe(recipe.recipe);" class="btn btn-sm btn-info">Save</a>
-            <a href="#" ng-if="searchComp.user && searchComp.DataServices.isRecipeSaved(recipe.recipe.uri, searchComp.savedRecipes)" ng-click="searchComp.deleteRecipe(recipe.recipe);" class="btn btn-sm btn-info btn-delete">Remove</a>
+            <a href="#" ng-if="searchComp.user && searchComp.DataServices.isRecipeSaved(recipe.recipe.uri, searchComp.savedRecipes)" ng-click="searchComp.deleteRecipe(recipe.recipe.uri);" class="btn btn-sm btn-info btn-delete">Remove</a>
           </div>
         </div>
       </div>

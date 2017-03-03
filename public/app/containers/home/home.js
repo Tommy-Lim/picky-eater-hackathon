@@ -29,17 +29,13 @@ function HomeCompCtrl($interval, $state, DataServices, AuthServices, Auth){
 
   homeComp.addRecipe = function(recipe){
     DataServices.addRecipe(recipe).then(function(data){
-      homeComp.savedRecipes = data.map(function(item){
-        return JSON.parse(item);
-      })
+      homeComp.savedRecipes = data;
     })
   }
 
-  homeComp.deleteRecipe = function(recipe){
-    DataServices.deleteRecipe(recipe).then(function(data){
-      homeComp.savedRecipes = data.map(function(item){
-        return JSON.parse(item);
-      })
+  homeComp.deleteRecipe = function(uri){
+    DataServices.deleteRecipe(uri).then(function(data){
+      homeComp.savedRecipes = data;
     })
   }
 

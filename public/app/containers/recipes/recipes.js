@@ -24,17 +24,13 @@ function RecipesCompCtrl($state, $scope, $timeout, $window, $location, DataServi
 
   recipesComp.addRecipe = function(recipe){
     DataServices.addRecipe(recipe).then(function(data){
-      recipesComp.savedRecipes = data.map(function(item){
-        return JSON.parse(item);
-      })
+      recipesComp.savedRecipes = data;
     })
   }
 
   recipesComp.deleteRecipe = function(recipe){
     DataServices.deleteRecipe(recipe).then(function(data){
-      recipesComp.savedRecipes = data.map(function(item){
-        return JSON.parse(item);
-      })
+      recipesComp.savedRecipes = data;
     })
   }
 

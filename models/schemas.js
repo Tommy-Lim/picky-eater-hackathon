@@ -19,7 +19,7 @@ var UserSchema = new mongoose.Schema({
     health: [String],
     blogs: [String]
   },
-  recipes: [String]
+  recipes: []
 },{
   collection: 'Users'
 });

@@ -24,7 +24,7 @@
 
       <a href="#" ng-if="!recipesComp.user" ui-sref="authState()" class="btn btn-info button-recipe">Log in to Save</a>
       <a href="#" ng-if="recipesComp.user && !recipesComp.DataServices.isRecipeSaved(recipesComp.result.uri, recipesComp.savedRecipes)" ng-click="recipesComp.addRecipe(recipesComp.result);" class="btn btn-info button-recipe">Save</a>
-      <a href="#" ng-if="recipesComp.user && recipesComp.DataServices.isRecipeSaved(recipesComp.result.uri, recipesComp.savedRecipes)" ng-click="recipesComp.deleteRecipe(recipesComp.result);" class="btn btn-info button-recipe btn-delete">Remove</a>
+      <a href="#" ng-if="recipesComp.user && recipesComp.DataServices.isRecipeSaved(recipesComp.result.uri, recipesComp.savedRecipes)" ng-click="recipesComp.deleteRecipe(recipesComp.result.uri);" class="btn btn-info button-recipe btn-delete">Remove</a>
     </div>
   </div>
 
