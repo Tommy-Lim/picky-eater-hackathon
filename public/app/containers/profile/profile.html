@@ -6,7 +6,13 @@
 
   <div class="container search-container">
     <div class="search-results">
-      <h3 ng-show="profileComp.recipes.length == 0">No saved recipes</h3>
+      <div class="no-results" ng-show="profileComp.recipes.length == 0">
+        It looks like you haven't saved any recipes.
+        <a ui-sref="searchState({query:'salads'})">Search</a>
+        recipes by ingredient or dietary needs then click
+        <a href="#" class="btn btn-info button-recipe btn-sm">Save</a>
+        to keep your favorite recipes here.
+      </div >
       <div class="panel panel-default panel-recipe" ng-repeat="recipe in profileComp.recipes track by $index" id="{{recipe.label}}">
         <div class="panel-heading">
           <div class="panel-title">{{recipe.label}}</div>
